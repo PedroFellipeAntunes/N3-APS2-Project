@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [offers, setOffers] = useState()
 
-  //TESTE DE INSERIR
+  //TESTE DE INSERIRw
   function createPostSell() {
     let postObject = {
       "user_id": "67c4a207cdef29ea0eb6d281",
