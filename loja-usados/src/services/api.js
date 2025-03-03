@@ -22,6 +22,17 @@ export async function getSellOffer(id) {
     }
 }
 
+export async function getSellOffersWithFilters(filters) {
+    const queryParams = new URLSearchParams(filters).toString();
+    const response = await axios.get(`${URL}/sell_offer?${queryParams}`);
+
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        return;
+    }
+}
+
 export async function createSellOffer(offer) {
     const response = await axios.post(`${URL}/sell_offer`, offer);
 
@@ -43,6 +54,17 @@ export async function deleteSellOffer(id) {
 //Buying
 export async function getBuyOffers() {
     const response = await axios.get(`${URL}/buy_offer`);
+
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        return;
+    }
+}
+
+export async function getBuyOffersWithFilters(filters) {
+    const queryParams = new URLSearchParams(filters).toString();
+    const response = await axios.get(`${URL}/buy_offer?${queryParams}`);
 
     if (response.status === 200) {
         return response.data;

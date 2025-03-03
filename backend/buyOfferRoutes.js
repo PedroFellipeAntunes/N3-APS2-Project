@@ -3,32 +3,42 @@ const database = require("./connect");
 const Int32 = require("mongodb").Int32;
 const ObjectId = require('mongodb').ObjectId;
 
+const { buildBuyOfferQuery } = require("./filterUtils");
+
 let buyOfferRoutes = express.Router();
 
 //#1 Get All
 //http://localhost:3000/buy_offer
 buyOfferRoutes.route("/buy_offer").get(async (request, response) => {
     let db = database.getDb();
-    let data = await db.collection("buy_offer").find({}).toArray();
+    let query = buildBuyOfferQuery(request.query);
 
-    if (data.length > 0) {
-        response.json(data);
-    } else {
-        //Without a catch this will cause the server to stop running
-        throw new Error("Data was not found");
+    try {
+        let data = await db.collection("buy_offer").find(query).toArray();
+        
+        if (data.length > 0) {
+            response.json(data);
+        } else {
+            response.status(404).json({ error: "Nenhuma oferta encontrada." });
+        }
+    } catch (error) {
+        response.status(500).json({ error: "Erro ao buscar ofertas" });
     }
 });
 
 //#2 Get One
 buyOfferRoutes.route("/buy_offer/:id").get(async (request, response) => {
-    let db = database.getDb();
-    let data = await db.collection("buy_offer").findOne({_id: new ObjectId(request.params.id)});
+    try {
+        let db = database.getDb();
+        let data = await db.collection("buy_offer").findOne({_id: new ObjectId(request.params.id)});
 
-    if (Object.keys(data.length > 0)) {
-        response.json(data);
-    } else {
-        //Without a catch this will cause the server to stop running
-        throw new Error("Data was not found");
+        if (Object.keys(data.length > 0)) {
+            response.json(data);
+        } else {
+            response.status(404).json({ error: "Nenhuma oferta encontrada." });
+        }
+    } catch (error) {
+        response.status(500).json({ error: "Erro ao buscar ofertas" });
     }
 });
 
@@ -42,8 +52,9 @@ buyOfferRoutes.route("/buy_offer").post(async (request, response) => {
         "negotiable": request.body.negotiable,
         "created_at": new Date(), // Garantindo Date válido
         "location": request.body.location, // Mantendo como objeto diretamente
-        "delivery": request.body.delivery,
-        "product": request.body.product
+        "retrival": request.body.retrival,
+        "product": request.body.product,
+        "auction": [] //Empty array
     };
 
     let data = await db.collection("buy_offer").insertOne(mongoObject);
@@ -62,8 +73,9 @@ buyOfferRoutes.route("/buy_offer/:id").put(async (request, response) => {
             "negotiable": request.body.negotiable,
             "created_at": new Date(), // Garantindo Date válido
             "location": request.body.location, // Mantendo como objeto diretamente
-            "delivery": request.body.delivery,
-            "product": request.body.product
+            "retrival": request.body.retrival,
+            "product": request.body.product,
+            "auction": request.body.auction || [] //Data or empty
         }
     };
 

@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
-import { getSellOffer, getSellOffers, createSellOffer, updateSellOffer, deleteSellOffer } from './services/api';
-import { getBuyOffer, getBuyOffers, createBuyOffer, updateBuyOffer, deleteBuyOffer } from './services/api';
+import { getSellOffer, getSellOffers, createSellOffer, updateSellOffer, deleteSellOffer, getSellOffersWithFilters } from './services/api';
+import { getBuyOffer, getBuyOffers, createBuyOffer, updateBuyOffer, deleteBuyOffer, getBuyOffersWithFilters } from './services/api';
 import axios from "axios";
+import { Header } from "./components/header"
 import './App.css'
 
 function App() {
   const [offers, setOffers] = useState()
 
-  //TESTE DE INSERIRw
+  //TESTE DE INSERIR
   function createPostSell() {
     let postObject = {
       "user_id": "67c4a207cdef29ea0eb6d281",
@@ -33,7 +34,9 @@ function App() {
         "usage_category": "used",
         "usage_time_months": 3,
         "usage_type": ["AI training"],
-        "overclocked": true,
+        "overclocked": true, //GPU only stuff
+        "vram": "8gb",
+        "clock_speed": "1607MHz",
         "repaired": {
           "status": true,
           "description": "Fucked"
@@ -74,6 +77,8 @@ function App() {
         "max_usage_time_months": 3,
         "usage_categories": ["AI training"],
         "overclocked": true,
+        "vram": "8gb",
+        "clock_speed": "1607MHz",
         "repaired": {
           "status": true,
           "description": "Fucked"
@@ -83,26 +88,47 @@ function App() {
           "min_valid_until": "2025-09-10"
         }
       }
+      //No auctions when new
     };
 
     createBuyOffer(postObject);
   }
 
   //TESTE DE PEGAR TODOS OS DADOS DO BACKEND
-  // useEffect(() => {
-  //   async function loadAllOffers() {
-  //     let data = await getSellOffers();
+  useEffect(() => {
+    async function loadAllOffers() {
+      const filters = {
+        // usage_category: "used",
+        // max_price: 1000
+        // manufacturer: "AMD"
+      };
 
-  //     if (data) {
-  //       setOffers(data);
-  //     }
-  //   }
+      let data = await getBuyOffersWithFilters(filters);
 
-  //   loadAllOffers();
-  // }, []);
+      if (data) {
+        setOffers(data);
+      }
+    }
+
+    loadAllOffers();
+  }, []);
+
+  //Home Page (no need for account, show all sell offers)
+  //Buy Offer Page (visualize only buy offers)
+  //Login Page (Create account or login)
+  //Search Page (allows to filter content, has a variant for )
+  //View offer Selling page
+  //View offer buying page
+  //Create offer page
+  //Account page
+  //Chat page (when negotiating a price for selling we need a page/or model element for the chat)
+  //No access page
+  //About page
   
   return (
     <>
+      <Header />
+      {JSON.stringify(offers)}
       <button onClick={createPostSell}>create Sell</button>
       <button onClick={createPostBuy}>create Buy</button>
     </>
