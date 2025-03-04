@@ -1,32 +1,57 @@
 header {
-    background-color: white;
+    background-color: #f8f8f8;
     display: flex;
+    gap: 0.5em;
     justify-content: space-between;
-    padding: 25px;
-    gap: 15px;
+    align-items: center;
+    padding: 1em 2em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Torna o header sticky */
+    top: 0; /* Fixa no topo */
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
+    flex-wrap: wrap;
 }
 
-header h1 {
-    color: black;
+header h1, header a {
+    color: #333;
     margin: 0;
     font-size: 40px;
+    text-decoration: none;
 }
-
+  
+header .search_bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+  
+header #search_area {
+    padding: 0.5em;
+    font-size: 16px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #ccc;
+    width: 300px;
+    resize: none;
+}
+ 
 header .buttons {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+    gap: 10px;
+}
+  
+header button {
+    padding: 0.5em 1em;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 0;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
 
-header button {
-    width: 150px;
-    height: 50px;
-    border-radius: 3px;
-    border: none;
-    background-color: black;
-    font-family: 'Courier New', Courier, monospace;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
+header button:hover {
+    background-color: #fb8c00;
 }

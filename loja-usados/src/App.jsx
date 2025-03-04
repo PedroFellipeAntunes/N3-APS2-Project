@@ -3,6 +3,8 @@ import { getSellOffer, getSellOffers, createSellOffer, updateSellOffer, deleteSe
 import { getBuyOffer, getBuyOffers, createBuyOffer, updateBuyOffer, deleteBuyOffer, getBuyOffersWithFilters } from './services/api';
 import axios from "axios";
 import { Header } from "./components/header"
+import { Banner } from "./components/banner"
+import { Footer } from "./components/footer"
 import './App.css'
 
 function App() {
@@ -128,9 +130,13 @@ function App() {
   return (
     <>
       <Header />
-      {JSON.stringify(offers)}
-      <button onClick={createPostSell}>create Sell</button>
-      <button onClick={createPostBuy}>create Buy</button>
+      <Banner />
+      <main>
+        {JSON.stringify(offers)}
+        <button onClick={createPostSell}>create Sell</button>
+        <button onClick={createPostBuy}>create Buy</button>
+      </main>
+      <Footer />
     </>
   )
 }

@@ -1,0 +1,55 @@
+.banner {
+    display: flex;
+    width: 100%;
+    min-height: 20em;
+    background-color: #f8f8f8;
+    position: relative;
+  }
+  
+  .banner-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;  /* Ocupa metade do banner */
+    padding: 0 20px;
+  }
+  
+  .banner h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+  }
+
+  .banner span {
+    font-size: 2.5rem;
+  }
+  
+  .banner-image {
+    width: 50%;
+    height: 100%;
+    object-fit: fit;
+  }
+
+  .banner-controls {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 93vw;
+  }
+  
+  .prev-button, .next-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .prev-button:hover, .next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
