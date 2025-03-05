@@ -5,11 +5,11 @@ export const Banner = () => {
   const banners = [
     { 
       text: 'Peças de PC de segunda mão, de <span>brasileiro</span> para <span>brasileiro</span>.',
-      image: '../public/images/ai_banner.jpeg',
+      image: './images/ai_banner.jpeg',
     },
     { 
       text: 'Não fique com dúvidas, tenha todas as informações sobre o produto!',
-      image: '../public/images/gpu_repair.webp',
+      image: './images/gpu_repair.webp',
     }
   ];
 

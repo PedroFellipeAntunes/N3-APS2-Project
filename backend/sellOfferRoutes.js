@@ -48,6 +48,7 @@ sellOfferRoutes.route("/sell_offer").post(async (request, response) => {
 
     let mongoObject = {
         "user_id": new ObjectId(request.body.user_id), // Convertendo para ObjectId
+        "type": "sell",
         "price": new Int32(request.body.price), // Convertendo para Int32
         "amount": new Int32(request.body.amount),
         "negotiable": request.body.negotiable,
@@ -70,6 +71,7 @@ sellOfferRoutes.route("/sell_offer/:id").put(async (request, response) => {
     let mongoObject = {
         $set: {
             "user_id": new ObjectId(request.body.user_id), // Convertendo para ObjectId
+            "type": "sell",
             "price": new Int32(request.body.price), // Convertendo para Int32
             "amount": new Int32(request.body.amount),
             "negotiable": request.body.negotiable,

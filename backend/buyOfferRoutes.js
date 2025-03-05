@@ -48,6 +48,7 @@ buyOfferRoutes.route("/buy_offer").post(async (request, response) => {
 
     let mongoObject = {
         "user_id": new ObjectId(request.body.user_id), // Convertendo para ObjectId
+        "type": "buy",
         "max_price": new Int32(request.body.max_price), // Convertendo para Int32
         "negotiable": request.body.negotiable,
         "created_at": new Date(), // Garantindo Date válido
@@ -69,6 +70,7 @@ buyOfferRoutes.route("/buy_offer/:id").put(async (request, response) => {
     let mongoObject = {
         $set: {
             "user_id": new ObjectId(request.body.user_id), // Convertendo para ObjectId
+            "type": "buy",
             "max_price": new Int32(request.body.max_price), // Convertendo para Int32
             "negotiable": request.body.negotiable,
             "created_at": new Date(), // Garantindo Date válido

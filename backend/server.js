@@ -15,5 +15,5 @@ app.use(buyOffers);
 
 app.listen(PORT, () => {
     connect.connectToServer();
-    console.log(`server on port ${PORT}`);
+    // console.log(`server on port ${PORT}`);
 });

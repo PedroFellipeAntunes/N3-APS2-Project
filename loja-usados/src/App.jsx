@@ -1,22 +1,40 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { getSellOffer, getSellOffers, createSellOffer, updateSellOffer, deleteSellOffer, getSellOffersWithFilters } from './services/api';
 import { getBuyOffer, getBuyOffers, createBuyOffer, updateBuyOffer, deleteBuyOffer, getBuyOffersWithFilters } from './services/api';
 import axios from "axios";
-import { Header } from "./components/header"
-import { Banner } from "./components/banner"
-import { Footer } from "./components/footer"
-import './App.css'
+import { Header } from "./components/header";
+import { Banner } from "./components/banner";
+import { Footer } from "./components/footer";
+import './App.css';
+
+// Função para converter imagem para Base64
+import { convertToBase64 } from './services/convertBase64';
 
 function App() {
-  const [offers, setOffers] = useState()
+  const [offers, setOffers] = useState([]);
+  const [images, setImages] = useState([]); // Para armazenar imagens em Base64
 
-  //TESTE DE INSERIR
+  // Função para converter todas as imagens e enviar para o backend
+  const handleImageUpload = async (event) => {
+    const files = event.target.files;
+    const imageBase64Array = [];
+
+    // Converter cada imagem para Base64
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const base64 = await convertToBase64(file);
+      imageBase64Array.push(base64);
+    }
+
+    setImages(imageBase64Array); // Atualiza o estado com as imagens convertidas
+  };
+
+  // Função para criar uma oferta de venda
   function createPostSell() {
     let postObject = {
       "user_id": "67c4a207cdef29ea0eb6d281",
-      "price": 333, // Garantindo que seja inteiro
+      "price": 123456, // Garantindo que seja inteiro
       "negotiable": true,
-      // "created_at": new Date(),
       "location": {
         "state": "MG",
         "city": "Aguas Vermelhas",
@@ -27,15 +45,15 @@ function App() {
         "in_person": true,
         "shipping": true
       },
-      "images": [],
+      "images": images, // Imagens convertidas para base64
       "product": {
         "category": "gpu",
-        "name": "NVIDIA RX 1080",
-        "manufacturer": "NVIDIA",
+        "name": "AMD RX 5500 XT",
+        "manufacturer": "AMD",
         "brand": "ASUS",
-        "usage_category": "used",
+        "usage_category": "Reparado",
         "usage_time_months": 3,
-        "usage_type": ["AI training"],
+        "usage_type": ["Gaming"],
         "overclocked": true, //GPU only stuff
         "vram": "8gb",
         "clock_speed": "1607MHz",
@@ -51,15 +69,14 @@ function App() {
     };
 
     createSellOffer(postObject);
-    createBuyOffer(postObject);
   }
 
+  // Função para criar uma oferta de compra
   function createPostBuy() {
     let postObject = {
       "user_id": "67c4a207cdef29ea0eb6d281",
       "max_price": 333, // Garantindo que seja inteiro
       "negotiable": true,
-      // "created_at": new Date(),
       "location": {
         "state": "MG",
         "city": "Aguas Vermelhas",
@@ -90,19 +107,16 @@ function App() {
           "min_valid_until": "2025-09-10"
         }
       }
-      //No auctions when new
     };
 
     createBuyOffer(postObject);
   }
 
-  //TESTE DE PEGAR TODOS OS DADOS DO BACKEND
+  // Função para carregar todas as ofertas de compra
   useEffect(() => {
     async function loadAllOffers() {
       const filters = {
-        // usage_category: "used",
-        // max_price: 1000
-        // manufacturer: "AMD"
+        // Add any filters you want to apply here
       };
 
       let data = await getBuyOffersWithFilters(filters);
@@ -115,30 +129,22 @@ function App() {
     loadAllOffers();
   }, []);
 
-  //Home Page (no need for account, show all sell offers)
-  //Buy Offer Page (visualize only buy offers)
-  //Login Page (Create account or login)
-  //Search Page (allows to filter content, has a variant for )
-  //View offer Selling page
-  //View offer buying page
-  //Create offer page
-  //Account page
-  //Chat page (when negotiating a price for selling we need a page/or model element for the chat)
-  //No access page
-  //About page
-  
   return (
     <>
       <Header />
       <Banner />
       <main>
         {JSON.stringify(offers)}
-        <button onClick={createPostSell}>create Sell</button>
-        <button onClick={createPostBuy}>create Buy</button>
+        
+        {/* Input para o upload de imagens */}
+        <input type="file" multiple onChange={handleImageUpload} />
+        
+        <button onClick={createPostSell}>Create Sell Offer</button>
+        <button onClick={createPostBuy}>Create Buy Offer</button>
       </main>
       <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

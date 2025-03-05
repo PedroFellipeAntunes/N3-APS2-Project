@@ -2,6 +2,8 @@
     display: flex;
     width: 100%;
     min-height: 20em;
+    height: 20em;
+    max-height: 20em;
     background-color: #f8f8f8;
     position: relative;
   }
@@ -37,7 +39,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    gap: 93vw;
+    gap: 90vw;
   }
   
   .prev-button, .next-button {

@@ -1,0 +1,22 @@
+.viewOffer_main {
+    margin: 0;
+    color: white;
+    display: flex;
+    gap: 1em;
+    padding: 2em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.viewOffer_main h1, .viewOffer_main a {
+    margin: 0;
+    text-decoration: none;
+    color: white;
+}
+
+.viewOffer_main div {
+    flex-grow: 1;
+    text-align: center;
+}
