@@ -3,13 +3,27 @@
     padding: 2em;
 }
 
-.group {
+/* .group {
     padding: 2em;
     border: 0;
     gap: 1em;
     background-color: #333;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+} */
+
+.group {
+    padding: 2em;
+    border: 0;
+    gap: 1em;
+    background-color: #333;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajuste dinâmico das colunas */
+    grid-template-rows: auto;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;

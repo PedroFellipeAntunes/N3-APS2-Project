@@ -1,0 +1,60 @@
+.search-bar {
+    background-color: #333;
+    padding: 1em;
+    border-radius: 6px;
+    color: #f8f8f8;
+    min-width: 25%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.search-bar input {
+    border-radius: 3px;
+    border: 0;
+    padding: 0.25rem;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.search-bar .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.search-bar button {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0.75em;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    border: 0;
+    flex: 1;
+}
+
+.search-bar button:hover {
+    cursor: pointer;
+    background-color: #fb8c00;
+    color: white;
+}
+
+/* Remove as setas dos inputs number */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.search-bar .check-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 100px;  /* Defina a altura máxima de acordo com suas necessidades */
+    overflow-y: auto;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

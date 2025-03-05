@@ -3,14 +3,33 @@
     padding: 2em;
     display: flex;
     margin: 0;
-    gap: 2.5em
+    gap: 2.5em;
+    flex-grow: 1;
 }
 
-.search-bar {
-    background-color: #333;
-    padding: 1em;
-    border-radius: 6px;
-    color: #f8f8f8;
-    min-width: 25%;
+.search_results {
+    flex-grow: 1;
     box-sizing: border-box;
+}
+
+.sorting-options {
+    background-color: #333;
+    border-radius: 3px;
+    padding: 1em;
+    margin-bottom: 1em;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+}
+
+.sorting-options #sorting {
+    border: 0;
+    border-radius: 3px;
+    padding: 0.5em;
+    background-color: #f8f8f8;
+    font-family: inherit;
+    font-weight: inherit;
 }

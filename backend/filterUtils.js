@@ -33,14 +33,9 @@ function buildSellOfferQuery(params) {
     }
 
     // Filtrar por status de reparo
-    if (params.repaired) {
-        query["product.repaired.status"] = params.repaired === "true";
-    }
-
-    // Filtrar por garantia disponível
-    if (params.warranty_available) {
-        query["product.warranty.available"] = params.warranty_available === "true";
-    }
+    // if (params.repaired) {
+    //     query["product.repaired.status"] = params.repaired === "true";
+    // }
 
     // Filtrar por nome do produto (busca parcial)
     if (params.name) {
@@ -81,8 +76,13 @@ function buildSellOfferQuery(params) {
     }
 
     // Filtrar por garantia válida até uma data
-    if (params.warranty_valid_until) {
-        query["product.warranty.valid_until"] = { $gte: params.warranty_valid_until };
+    // Filtrar por garantia disponível
+    if (params.warranty_available) {
+        query["product.warranty.available"] = params.warranty_available === "true";
+        
+        if (params.warranty_valid_until) {
+            query["product.warranty.valid_until"] = { $gte: params.warranty_valid_until };
+        }
     }
 
     // Filtrar por quantidade mínima disponível
@@ -94,6 +94,8 @@ function buildSellOfferQuery(params) {
     if (params.created_after) {
         query.created_at = { $gte: new Date(params.created_after) };
     }
+
+    console.log(query);
 
     return query;
 }
@@ -160,9 +162,9 @@ function buildBuyOfferQuery(params) {
     }
 
     // Filtrar por status de reparo
-    if (params.repaired) {
-        query["product.repaired.status"] = params.repaired === "true";
-    }
+    // if (params.repaired) {
+    //     query["product.repaired.status"] = params.repaired === "true";
+    // }
 
     // Filtrar por garantia disponível
     if (params.warranty_available) {
@@ -193,6 +195,8 @@ function buildBuyOfferQuery(params) {
     if (params.created_after) {
         query.created_at = { $gte: new Date(params.created_after) };
     }
+
+    console.log(query);
 
     return query;
 }
