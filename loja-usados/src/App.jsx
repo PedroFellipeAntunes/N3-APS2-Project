@@ -48,7 +48,7 @@ function App() {
       "images": images, // Imagens convertidas para base64
       "product": {
         "category": "gpu",
-        "name": "AMD RX 5500 XT",
+        "name": "TEST MANY IMAGES",
         "manufacturer": "AMD",
         "brand": "ASUS",
         "usage_category": "Reparado",

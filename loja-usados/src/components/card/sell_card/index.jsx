@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import "./index.css";
 
-export function SellCard({ offer, onFilterClick }) {
+export function SellCard({ offer }) {
     const [imageError, setImageError] = useState(false);  // Estado para verificar erro no carregamento da imagem
 
     const formattedPrice = (offer.price / 100).toLocaleString("pt-BR", {
@@ -13,11 +13,6 @@ export function SellCard({ offer, onFilterClick }) {
     const isNegotiable = offer.negotiable;
     const usageTypes = offer.product.usage_type || [];
 
-    // Funções que lidam com os cliques
-    const handleFilterClick = (filterType, value) => {
-        onFilterClick(filterType, value);  // Chama a função de filtro recebida como parâmetro
-    };
-
     const renderUsageTypes = () => {
         const limitedUsageTypes = usageTypes.slice(0, 4);  // Considera apenas os primeiros 4 tipos de uso
         
@@ -27,7 +22,6 @@ export function SellCard({ offer, onFilterClick }) {
                     <span 
                         key={index} 
                         className="usage-type" 
-                        onClick={() => handleFilterClick("usage_type", type)}
                     >
                         {type}
                     </span>
@@ -39,14 +33,12 @@ export function SellCard({ offer, onFilterClick }) {
     const renderCategoryAndBrand = () => (
         <div className="card-info">
             <h2 
-                className="product-brand" 
-                onClick={() => handleFilterClick("brand", offer.product.brand)} // Marca como filtro
+                className="product-brand"
             >
                 {offer.product.brand}
             </h2>
             <h2 
-                className="product-category" 
-                onClick={() => handleFilterClick("category", offer.product.usage_category)} // Categoria como filtro
+                className="product-category"
             >
                 {offer.product.usage_category}
             </h2>
@@ -57,7 +49,7 @@ export function SellCard({ offer, onFilterClick }) {
         setImageError(true); // Define que ocorreu erro no carregamento da imagem
     };
 
-    const imageSrc = offer.images?.[0] && !imageError ? offer.images[0] : "./images/default.jpg";  // A variável agora verifica a imagem
+    const imageSrc = offer.images?.[0] && !imageError ? offer.images[0] : "/images/default.jpg";  // A variável agora verifica a imagem
 
     return (
         <Link to={`/offer/${offer._id}`} className="card">

@@ -62,9 +62,14 @@ export const SearchBar = ({ onSearch, initialProductName  }) => {
         }
     };
 
+    const [resetting, setResetting] = useState(false);
+
     const handleReset = (e) => {
-        e.preventDefault(); // Impede o comportamento padrão de submit
-    
+        e.preventDefault();
+
+        // Marca que o reset foi acionado
+        setResetting(true);
+
         // Reseta os filtros
         setFilters({
             min_price: "",
@@ -88,12 +93,16 @@ export const SearchBar = ({ onSearch, initialProductName  }) => {
             min_amount: "",
             created_after: ""
         });
+    };
 
-        console.log("TST");
-    
-        // Agora, chama o handleSubmit após resetar os filtros
-        handleSubmit(e);
-    };    
+    // Esse efeito roda sempre que `filters` mudar, verificando se estamos resetando
+    useEffect(() => {
+        if (resetting) {
+            setResetting(false);
+            handleSubmit(new Event("submit")); // Dispara a busca após o reset
+        }
+    }, [filters]); 
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -114,6 +123,7 @@ export const SearchBar = ({ onSearch, initialProductName  }) => {
 
     return (
         <form className="search-bar" onSubmit={handleSubmit}>
+            <h2>Filtro:</h2>
             <input type="text" name="name" placeholder="Nome do produto" value={filters.name} onChange={handleChange} />
             <input type="text" name="manufacturer" placeholder="Fabricante" value={filters.manufacturer} onChange={handleChange} />
             <input type="text" name="brand" placeholder="Marca" value={filters.brand} onChange={handleChange} />

@@ -1,0 +1,164 @@
+.sell-info {
+  padding: 20px;
+  background: #333;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+  
+.sell-info h1 {
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.sell-info .images {
+  width: 50%;
+}
+
+.sell-info .product-name {
+  overflow: visible;
+  text-overflow: unset;
+  text-wrap: wrap;
+  text-align: left;
+}
+
+.sell-info img {
+  width: 100%;
+  min-height: 250px;
+  max-height: 250px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.sell-info .top-area {
+  display: flex;
+  gap: 2.5em;
+}
+
+.sell-info h1, .sell-info h2 {
+  margin: 0;
+}
+
+.top-area .basic-info {
+  width: 50%;
+  display: flex;
+  padding-left: 2.5em;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-left: 2px solid #f8f8f8;
+  overflow-wrap: 1;
+}
+
+.basic-info-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.sell-info h2 {
+  font-size: 20px;
+  margin-top: 15px;
+  /* border-bottom: 2px solid #f8f8f8;; */
+  padding-bottom: 5px;
+}
+
+.sell-info h3 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.sell-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.sell-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sell-info ul li {
+  background: #f3f3f3;
+  padding: 5px 10px;
+  margin: 3px 0;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #28a745;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.bottom-area {
+  border-top: 2px solid #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.bottom-area section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 2px solid #f8f8f8;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bottom-area h1, .bottom-area h2 {
+  margin: 0;
+}
+
+.sell-info .image-navigation {
+  display: flex;
+  gap: 1em;
+  margin-top: 0.5em;
+}
+
+.sell-info .image-navigation button {
+  width: 100%;
+  background-color: #f3f3f3;
+  border: 0;
+  padding: 0.5em;
+  border-radius: 3px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.sell-info .image-navigation button:hover {
+  background-color: #fb8c00;
+  color: #f3f3f3;
+  cursor: pointer;
+}
+
+.sell-info ul {
+  margin: 0;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.sell-info li {
+  background-color: #f3f3f3;
+  color: #333;
+  margin: 0;
+}

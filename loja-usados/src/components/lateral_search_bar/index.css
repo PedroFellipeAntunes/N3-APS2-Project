@@ -41,6 +41,10 @@
     color: white;
 }
 
+.search-bar h2 {
+    margin: 0;
+}
+
 /* Remove as setas dos inputs number */
 input[type="number"] {
     -moz-appearance: textfield;

@@ -29,10 +29,6 @@
     margin: 0;
 }
 
-.card h2:hover {
-    text-decoration: underline;
-}
-
 .price {
     display: flex;
     justify-content: end;
@@ -90,12 +86,6 @@
     transition: background-color 0.2s ease;
 }
 
-.usage-type:hover, .usage-category:hover {
-    background-color: #fb8c00;
-    border-color: #fb8c00;
-    color: white;
-}
-
 .product-name {
     font-size: 18px;
     font-weight: bold;
@@ -117,10 +107,6 @@
     font-weight: bold;
     width: 100%;
     box-sizing: border-box;
-}
-
-.negotiable:hover {
-    background-color: #fb8c00;
 }
 
 .price-value {
