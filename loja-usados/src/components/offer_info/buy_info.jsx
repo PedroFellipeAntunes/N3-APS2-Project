@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./index.css";
 
-export function SellInfo({ offer }) {
+export function BuyInfo({ offer }) {
   const [imageError, setImageError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -73,11 +73,13 @@ export function SellInfo({ offer }) {
           )}
         </section>
 
-        <section>
-          <h2>Entrega</h2>
-          <p>{offer.delivery.in_person ? "✅ Retirada em mãos disponível" : "❌ Sem retirada em mãos"}</p>
-          <p>{offer.delivery.shipping ? "✅ Envio disponível" : "❌ Sem envio"}</p>
-        </section>
+        {offer.retrieval && (
+            <section>
+                <h2>Recebimento de pacote</h2>
+                <p>{offer.retrieval.in_person ? "✅ Retirada em mãos disponível" : "❌ Sem retirada em mãos"}</p>
+                <p>{offer.retrieval.shipping ? "✅ Envio disponível" : "❌ Sem envio"}</p>
+            </section>
+        )}
 
         <section>
           <h2>Localização</h2>

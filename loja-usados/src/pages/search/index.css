@@ -33,3 +33,17 @@
     font-family: inherit;
     font-weight: inherit;
 }
+
+.search_results .empty-search {
+    background-color: #333;
+    color: #f8f8f8;
+    margin: 0;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border-top-left-radius: 0;
+}
+
+.empty-search h1 {
+    margin: 0;
+}

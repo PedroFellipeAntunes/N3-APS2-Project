@@ -57,6 +57,8 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    flex-grow: 1;
+    align-items: flex-end;
 }
 
 .usage-type {
@@ -67,7 +69,8 @@
     padding: 4px 12px;
     font-size: 14px;
     cursor: pointer;
-    flex-grow: 1;
+    width: fit-content;
+    height: fit-content;
     transition: background-color 0.2s ease;
 }
 
@@ -98,4 +101,5 @@
     font-size: 26px;
     font-weight: bold;
     margin: 0;
+    color: #333;
 }

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getSellOffersWithFilters, getBuyOffersWithFilters } from '../../services/api';
+
+import { getOffersWithFilters } from '../../services/api';
+
 import { Header } from '../../components/header';
 import { Footer } from '../../components/footer';
 import { SellCard } from '../../components/card/sell_card';
 import { BuyCard } from '../../components/card/buy_card';
 import { SearchBar } from '../../components/lateral_search_bar';
+
 import './index.css';
 
 export default function Search() {
@@ -27,11 +30,19 @@ export default function Search() {
 
     useEffect(() => {
         async function loadAllOffers() {
-            const dataSell = await getSellOffersWithFilters(filters);
-            const dataBuy = await getBuyOffersWithFilters(filters);
-            setSellOffers(sortOffers(dataSell, sortOption));
-            setBuyOffers(sortOffers(dataBuy, sortOption));
+            try {
+                const [sellData, buyData] = await Promise.all([
+                    getOffersWithFilters({ ...filters, type: "sell" }),
+                    getOffersWithFilters({ ...filters, type: "buy" })
+                ]);
+
+                setSellOffers(sortOffers(sellData, sortOption));
+                setBuyOffers(sortOffers(buyData, sortOption));
+            } catch (error) {
+                console.error("Erro ao carregar ofertas:", error);
+            }
         }
+
         loadAllOffers();
     }, [filters, sortOption]); // Recarrega sempre que `filters` ou `sortOption` mudar
 
@@ -75,19 +86,31 @@ export default function Search() {
                     </div>
 
                     {activeTab === "sell" && (
-                        <div className='group'>
-                            {sellOffers.map((sellOffer) => (
-                                <SellCard key={sellOffer._id} offer={sellOffer} />
-                            ))}
-                        </div>
+                        sellOffers.length > 0 ? (
+                            <div className='group'>
+                                {sellOffers.map((sellOffer) => (
+                                    <SellCard key={sellOffer._id} offer={sellOffer} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className='empty-search'>
+                                <h1>Não há ofertas de venda disponíveis.</h1>
+                            </div>
+                        )
                     )}
 
                     {activeTab === "buy" && (
-                        <div className='group'>
-                            {buyOffers.map((buyOffer) => (
-                                <BuyCard key={buyOffer._id} offer={buyOffer} />
-                            ))}
-                        </div>
+                        buyOffers.length > 0 ? (
+                            <div className='group'>
+                                {buyOffers.map((buyOffer) => (
+                                    <BuyCard key={buyOffer._id} offer={buyOffer} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className='empty-search'>
+                                <h1>Não há ofertas de compra disponíveis.</h1>
+                            </div>
+                        )
                     )}
                 </div>
             </main>

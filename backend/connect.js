@@ -15,7 +15,7 @@ let database;
 
 module.exports = {
     connectToServer: () => {
-        database = client.db("data_offer");
+        database = client.db("data");
     },
     getDb: () => {
         return database;

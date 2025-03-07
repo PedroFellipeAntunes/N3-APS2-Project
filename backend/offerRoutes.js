@@ -8,6 +8,7 @@ const { buildOfferQuery } = require("./filterUtils");
 let offerRoutes = express.Router();
 
 //#1 Get All
+//http://localhost:3000/offer
 offerRoutes.route("/offer").get(async (request, response) => {
     let db = database.getDb();
     let query = buildOfferQuery(request.query);
@@ -31,7 +32,7 @@ offerRoutes.route("/offer/:id").get(async (request, response) => {
         let db = database.getDb();
         let data = await db.collection("offer").findOne({_id: new ObjectId(request.params.id)});
 
-        if (data) {
+        if (Object.keys(data.length > 0)) {
             response.json(data);
         } else {
             response.status(404).json({ error: "Nenhuma oferta encontrada." });
@@ -45,8 +46,6 @@ offerRoutes.route("/offer/:id").get(async (request, response) => {
 offerRoutes.route("/offer").post(async (request, response) => {
     let db = database.getDb();
     let offerType = request.body.type;
-
-    let mongoObject;
 
     if (offerType === "buy") {
         mongoObject = {
@@ -84,8 +83,6 @@ offerRoutes.route("/offer").post(async (request, response) => {
 offerRoutes.route("/offer/:id").put(async (request, response) => {
     let db = database.getDb();
     let offerType = request.body.type;
-
-    let mongoObject;
 
     if (offerType === "buy") {
         mongoObject = {

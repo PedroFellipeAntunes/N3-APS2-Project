@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { getSellOffers, getBuyOffers } from '../../services/api';
+import { getOffers } from '../../services/api';
 
 import { Header } from '../../components/header';
 import { Banner } from '../../components/banner';
@@ -18,11 +18,14 @@ export default function Home() {
 
     useEffect(() => {
         async function loadAllOffers() {
-            const dataSell = await getSellOffers();
-            const dataBuy = await getBuyOffers();
+            const allOffers = await getOffers();
 
-            setSellOffers(dataSell);
-            setBuyOffers(dataBuy);
+            // Separar as ofertas com base no atributo "type"
+            const sell = allOffers.filter(offer => offer.type === "sell");
+            const buy = allOffers.filter(offer => offer.type === "buy");
+
+            setSellOffers(sell);
+            setBuyOffers(buy);
         }
 
         loadAllOffers();

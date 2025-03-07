@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getSellOffer, getSellOffers, createSellOffer, updateSellOffer, deleteSellOffer, getSellOffersWithFilters } from './services/api';
-import { getBuyOffer, getBuyOffers, createBuyOffer, updateBuyOffer, deleteBuyOffer, getBuyOffersWithFilters } from './services/api';
+// import { getSellOffer, getSellOffers, createSellOffer, updateSellOffer, deleteSellOffer, getSellOffersWithFilters } from './services/api';
+// import { getBuyOffer, getBuyOffers, createBuyOffer, updateBuyOffer, deleteBuyOffer, getBuyOffersWithFilters } from './services/api';
+import { getOffersWithFilters, createOffer } from './services/api';
 import axios from "axios";
 import { Header } from "./components/header";
 import { Banner } from "./components/banner";
@@ -35,6 +36,7 @@ function App() {
       "user_id": "67c4a207cdef29ea0eb6d281",
       "price": 123456, // Garantindo que seja inteiro
       "negotiable": true,
+      "type": "sell",
       "location": {
         "state": "MG",
         "city": "Aguas Vermelhas",
@@ -68,7 +70,7 @@ function App() {
       }
     };
 
-    createSellOffer(postObject);
+    createOffer(postObject);
   }
 
   // Função para criar uma oferta de compra
@@ -77,13 +79,14 @@ function App() {
       "user_id": "67c4a207cdef29ea0eb6d281",
       "max_price": 333, // Garantindo que seja inteiro
       "negotiable": true,
+      "type": "buy",
       "location": {
         "state": "MG",
         "city": "Aguas Vermelhas",
         "restricted_area": false,
         "range": null
       },
-      "retrival": {
+      "retrieval": {
         "in_person": true,
         "shipping": true
       },
@@ -109,7 +112,7 @@ function App() {
       }
     };
 
-    createBuyOffer(postObject);
+    createOffer(postObject);
   }
 
   // Função para carregar todas as ofertas de compra
@@ -119,7 +122,7 @@ function App() {
         // Add any filters you want to apply here
       };
 
-      let data = await getBuyOffersWithFilters(filters);
+      let data = await getOffersWithFilters(filters);
 
       if (data) {
         setOffers(data);
