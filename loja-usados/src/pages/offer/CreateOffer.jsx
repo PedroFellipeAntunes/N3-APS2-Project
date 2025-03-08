@@ -22,7 +22,7 @@ export default function CreateOffer() {
             </div>
           </div>
         ) : (
-          <div className="offerForm">
+          <div className="offer-form">
             <div className="go-back">
                 <button onClick={() => setOfferType(null)} className="backButton">Voltar</button>
             </div>

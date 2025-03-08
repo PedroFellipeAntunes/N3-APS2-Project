@@ -52,6 +52,7 @@ export default function SellOfferForm() {
         available: false,
         valid_until: "",
       },
+      description: ""
     },
   });
 
@@ -90,6 +91,9 @@ export default function SellOfferForm() {
       alert("Selecione pelo menos uma opção de entrega.");
       return;
     }
+
+    // console.log(formData);
+    // return;
   
     // Conectar server
     try {
@@ -110,7 +114,7 @@ export default function SellOfferForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="sellOfferForm">
+    <form onSubmit={handleSubmit} className="offer-form-data">
       <h2>Criar Oferta de Venda</h2>
 
       <ProductDetails formData={formData} setFormData={setFormData} />

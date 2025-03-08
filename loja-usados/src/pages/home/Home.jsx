@@ -15,17 +15,25 @@ export default function Home() {
     const [sellOffers, setSellOffers] = useState([]);
     const [buyOffers, setBuyOffers] = useState([]);
     const [activeTab, setActiveTab] = useState("sell"); // 'sell' ou 'buy'
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function loadAllOffers() {
-            const allOffers = await getOffers();
+            setLoading(true);
+            try {
+                const allOffers = await getOffers();
 
-            // Separar as ofertas com base no atributo "type"
-            const sell = allOffers.filter(offer => offer.type === "sell");
-            const buy = allOffers.filter(offer => offer.type === "buy");
+                // Separar as ofertas com base no atributo "type"
+                const sell = allOffers.filter(offer => offer.type === "sell");
+                const buy = allOffers.filter(offer => offer.type === "buy");
 
-            setSellOffers(sell);
-            setBuyOffers(buy);
+                setSellOffers(sell);
+                setBuyOffers(buy);
+            } catch (error) {
+                console.error("Erro ao carregar ofertas:", error);
+            } finally {
+                setLoading(false);
+            }
         }
 
         loadAllOffers();
@@ -55,16 +63,37 @@ export default function Home() {
                 {/* Exibição condicional dos grupos */}
                 {activeTab === "sell" && (
                     <div className='group'>
-                        {sellOffers.map((sellOffer) => (
-                            <SellCard key={sellOffer._id} offer={sellOffer} />
-                        ))}
+                        {loading ? (
+                            <div className='empty-search'>
+                                <h1>Carregando...</h1>
+                            </div>
+                        ) : sellOffers.length > 0 ? (
+                            sellOffers.map((sellOffer) => (
+                                <SellCard key={sellOffer._id} offer={sellOffer} />
+                            ))
+                        ) : (
+                            <div className='empty-search'>
+                                <h1>Não há ofertas de venda disponíveis.</h1>
+                            </div>
+                        )}
                     </div>
                 )}
+
                 {activeTab === "buy" && (
                     <div className='group'>
-                        {buyOffers.map((buyOffer) => (
-                            <BuyCard key={buyOffer._id} offer={buyOffer} />
-                        ))}
+                        {loading ? (
+                            <div className='empty-search'>
+                                <h1>Carregando...</h1>
+                            </div>
+                        ) : buyOffers.length > 0 ? (
+                            buyOffers.map((buyOffer) => (
+                                <BuyCard key={buyOffer._id} offer={buyOffer} />
+                            ))
+                        ) : (
+                            <div className='empty-search'>
+                                <h1>Não há ofertas de compra disponíveis.</h1>
+                            </div>
+                        )}
                     </div>
                 )}
             </main>

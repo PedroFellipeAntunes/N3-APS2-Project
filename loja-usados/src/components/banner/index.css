@@ -1,57 +1,59 @@
 .banner {
-    display: flex;
-    width: 100%;
-    min-height: 20em;
-    height: 20em;
-    max-height: 20em;
-    background-color: #f8f8f8;
-    position: relative;
-  }
-  
-  .banner-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;  /* Ocupa metade do banner */
-    padding: 0 20px;
-  }
-  
-  .banner h1 {
-    margin: 0;
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-  }
+  display: flex;
+  width: 100%;
+  min-height: 20em;
+  height: 20em;
+  max-height: 20em;
+  background-color: #f8f8f8;
+  position: relative;
+  overflow: hidden; /* Evita que a imagem afete o tamanho do banner */
+}
 
-  .banner span {
-    font-size: 2.5rem;
-  }
-  
-  .banner-image {
-    width: 50%;
-    height: 100%;
-    object-fit: fit;
-  }
+.banner-image {
+  width: 50%;
+  height: 100%;
+  object-fit: cover; /* Mantém a proporção e corta se necessário */
+  display: block; /* Remove comportamento inline indesejado */
+}
 
-  .banner-controls {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    gap: 90vw;
-  }
-  
-  .prev-button, .next-button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .prev-button:hover, .next-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
+.banner-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;  /* Ocupa metade do banner */
+  padding: 0 20px;
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.banner span {
+  font-size: 2.5rem;
+}
+
+.banner-controls {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 90vw;
+}
+
+.prev-button, .next-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.prev-button:hover, .next-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}

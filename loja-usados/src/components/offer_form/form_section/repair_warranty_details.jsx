@@ -16,12 +16,18 @@ function RepairWarranty({ formData, setFormData }) {
                 {formData.product.repaired.status && (
                     <label>
                         Descrição do reparo:
-                        <input
-                            type="text"
+                        <textarea
                             value={formData.product.repaired.description}
                             onChange={(e) => setFormData({
-                            ...formData, product: { ...formData.product, repaired: { ...formData.product.repaired, description: e.target.value } }
+                                ...formData, product: { 
+                                    ...formData.product, 
+                                    repaired: { 
+                                        ...formData.product.repaired, 
+                                        description: e.target.value 
+                                    } 
+                                }
                             })}
+                            className="repair-desc"
                             required
                         />
                     </label>

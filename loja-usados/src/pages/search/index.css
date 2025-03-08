@@ -34,7 +34,7 @@
     font-weight: inherit;
 }
 
-.search_results .empty-search {
+.empty-search {
     background-color: #333;
     color: #f8f8f8;
     margin: 0;

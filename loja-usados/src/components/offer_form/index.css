@@ -1,4 +1,4 @@
-.sellOfferForm {
+.offer-form-data {
     background-color: #333;
     color: #f8f8f8;
     /* background-color: #f8f8f8; */
@@ -12,11 +12,11 @@
     box-sizing: border-box;
 }
 
-.sellOfferForm h2 {
+.offer-form-data h2 {
     margin: 0;
 }
 
-.sellOfferForm section {
+.offer-form-data section {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -24,7 +24,7 @@
     gap: inherit;
 }
 
-.sellOfferForm fieldset {
+.offer-form-data fieldset {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -34,7 +34,7 @@
     border-radius: 3px;
 }
 
-.sellOfferForm fieldset label {
+.offer-form-data fieldset label {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -48,7 +48,7 @@ input[type="check"] {
     box-sizing: border-box;
 }
 
-.sellOfferForm select {
+.offer-form-data select {
     width: 100%;
     box-sizing: border-box;
     font-family: inherit;
@@ -59,16 +59,22 @@ input[type="check"] {
     border-radius: 3px;
 }
 
-.sellOfferForm .usage {
+.offer-form-data .usage {
     display: flex;
 }
 
-.sellOfferForm .form-usage-types {
+.offer-form-data .form-usage-types {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.sellOfferForm .imagePreview {
+.offer-form-data .form-usage-types label {
+    width: fit-content;
+}
+
+.offer-form-data .imagePreview {
     background-color: #f8f8f8;
     border-radius: 6px;
     padding: 1em;
@@ -83,14 +89,14 @@ input[type="check"] {
     gap: 1em;
 }
 
-.sellOfferForm .imagePreview img {
+.offer-form-data .imagePreview img {
     width: 100%;  /* Faz a imagem preencher o contêiner */
     height: 100%;
     object-fit: contain; /* Mantém proporção e evita cortes */
     box-sizing: inherit;
 }
 
-.sellOfferForm .imagePreview .image-navigation {
+.offer-form-data .imagePreview .image-navigation {
     display: flex;
     gap: 1em;
     margin-top: 0.5em;
@@ -98,7 +104,7 @@ input[type="check"] {
     box-sizing: border-box;
 }
   
-.sellOfferForm .imagePreview .image-navigation button {
+.offer-form-data .imagePreview .image-navigation button {
     width: 100%;
     background-color: #333;
     border: 0;
@@ -109,7 +115,7 @@ input[type="check"] {
     color: white;
 }
   
-.sellOfferForm .imagePreview button:hover,
+.offer-form-data .imagePreview button:hover,
 .create-form-submit:hover {
     background-color: #fb8c00;
     cursor: pointer;
@@ -124,4 +130,23 @@ input[type="check"] {
     font-size: 20px;
     font-weight: bold;
     color: #333;
+}
+
+.offer-form-data .repair-desc {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    min-height: 10em;
+    font-size: 14px;
+}
+
+.offer-form-data .usage .usage-categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.offer-form-data .usage .usage-categories label {
+    width: fit-content;
 }

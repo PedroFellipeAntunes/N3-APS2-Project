@@ -59,6 +59,11 @@ export function BuyInfo({ offer }) {
           <h2>Localização</h2>
           <p>{offer.location.city}, {offer.location.state}</p>
         </section>
+
+        <section>
+          <h2>Descrição de Oferta</h2>
+          <p className="offer-desc">{offer.product.description}</p>
+        </section>
       </div>
     </div>
   );

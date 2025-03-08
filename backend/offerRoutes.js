@@ -62,6 +62,8 @@ offerRoutes.route("/offer").post(async (request, response) => {
     let db = database.getDb();
     let offerType = request.body.type;
 
+    console.log(request.body.user_id);
+
     if (offerType === "buy") {
         mongoObject = {
             "user_id": new ObjectId(request.body.user_id),
@@ -72,7 +74,7 @@ offerRoutes.route("/offer").post(async (request, response) => {
             "location": request.body.location,
             "retrival": request.body.retrival,
             "product": request.body.product,
-            "auction": request.body.auction || []
+            "auction": []
         };
     } else {
         mongoObject = {

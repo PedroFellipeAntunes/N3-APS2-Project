@@ -19,17 +19,18 @@ export default function Search() {
     const [sellOffers, setSellOffers] = useState([]);
     const [buyOffers, setBuyOffers] = useState([]);
     const [activeTab, setActiveTab] = useState("sell");
-    const [sortOption, setSortOption] = useState("price_asc"); 
+    const [sortOption, setSortOption] = useState("price_asc");
+    const [loading, setLoading] = useState(true);
 
-    // Atualiza os filtros toda vez que a URL muda
     const [filters, setFilters] = useState({ name: product_name });
 
     useEffect(() => {
-        setFilters({ name: product_name }); // Atualiza os filtros sempre que a URL mudar
-    }, [location.search]); // Depende do `location.search`
+        setFilters({ name: product_name });
+    }, [location.search]);
 
     useEffect(() => {
         async function loadAllOffers() {
+            setLoading(true);
             try {
                 const [sellData, buyData] = await Promise.all([
                     getOffersWithFilters({ ...filters, type: "sell" }),
@@ -40,13 +41,14 @@ export default function Search() {
                 setBuyOffers(sortOffers(buyData, sortOption));
             } catch (error) {
                 console.error("Erro ao carregar ofertas:", error);
+            } finally {
+                setLoading(false);
             }
         }
 
         loadAllOffers();
-    }, [filters, sortOption]); // Recarrega sempre que `filters` ou `sortOption` mudar
+    }, [filters, sortOption]);
 
-    // Função para ordenar as ofertas
     const sortOffers = (offers, option) => {
         switch (option) {
             case "price_asc": return [...offers].sort((a, b) => a.price - b.price);
@@ -86,31 +88,39 @@ export default function Search() {
                     </div>
 
                     {activeTab === "sell" && (
-                        sellOffers.length > 0 ? (
-                            <div className='group'>
-                                {sellOffers.map((sellOffer) => (
+                        <div className='group'>
+                            {loading ? (
+                                <div className='empty-search'>
+                                    <h1>Carregando...</h1>
+                                </div>
+                            ) : sellOffers.length > 0 ? (
+                                sellOffers.map((sellOffer) => (
                                     <SellCard key={sellOffer._id} offer={sellOffer} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className='empty-search'>
-                                <h1>Não há ofertas de venda disponíveis.</h1>
-                            </div>
-                        )
+                                ))
+                            ) : (
+                                <div className='empty-search'>
+                                    <h1>Não há ofertas de venda disponíveis.</h1>
+                                </div>
+                            )}
+                        </div>
                     )}
 
                     {activeTab === "buy" && (
-                        buyOffers.length > 0 ? (
-                            <div className='group'>
-                                {buyOffers.map((buyOffer) => (
+                        <div className='group'>
+                            {loading ? (
+                                <div className='empty-search'>
+                                    <h1>Carregando...</h1>
+                                </div>
+                            ) : buyOffers.length > 0 ? (
+                                buyOffers.map((buyOffer) => (
                                     <BuyCard key={buyOffer._id} offer={buyOffer} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className='empty-search'>
-                                <h1>Não há ofertas de compra disponíveis.</h1>
-                            </div>
-                        )
+                                ))
+                            ) : (
+                                <div className='empty-search'>
+                                    <h1>Não há ofertas de compra disponíveis.</h1>
+                                </div>
+                            )}
+                        </div>
                     )}
                 </div>
             </main>

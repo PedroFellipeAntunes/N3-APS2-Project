@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 
-.createOffer_main .offerForm {
+.createOffer_main .offer-form {
     display: flex;
     flex-direction: column;
     gap: 1.5em;
@@ -47,12 +47,12 @@
     box-sizing: border-box;
 }
 
-.createOffer_main .offerForm .go-back {
+.createOffer_main .offer-form .go-back {
     display: flex;
     justify-content: flex-start;
 }
 
-.createOffer_main .offerForm .go-back button {
+.createOffer_main .offer-form .go-back button {
     background-color: #333;
     color: white;
     font-family: inherit;
@@ -64,7 +64,7 @@
     width: 25%;
 }
 
-.createOffer_main .offerForm .go-back button:hover {
+.createOffer_main .offer-form .go-back button:hover {
     background-color: #fb8c00;
     cursor: pointer;
 }

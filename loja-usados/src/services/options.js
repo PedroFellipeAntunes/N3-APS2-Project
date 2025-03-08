@@ -9,3 +9,11 @@ export const usageCategories = [
 export const usageTypes = [
     "IA", "Mineração", "Office", "Renderização", "Jogos"
 ];
+
+export const filterCategories = [
+    "GPU", "CPU", "RAM"
+];
+
+export const filterUsageCategories = [
+    "Usado", "Reparado", "Quebrado"
+];

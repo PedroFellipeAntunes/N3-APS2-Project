@@ -1,51 +1,46 @@
 import { categories, filterCategories } from "../../../services/options";
 
-function ProductDetails({ formData, setFormData }) {
+function BuyProductDetails({ formData, setFormData }) {
     const handleCategoryChange = (e) => {
         const selectedCategory = e.target.value;
-    
+        
         setFormData({
             ...formData,
             product: {
                 ...formData.product,
                 category: selectedCategory,
-                overclock: filterCategories.includes(selectedCategory)
-                    ? formData.product.overclock // Mantém os valores existentes
-                    : { status: false, speed: "" }, // Reseta os valores
+                // Atualize apenas o campo overclocked, sem conflito
+                overclocked: filterCategories ? formData.product.overclocked : false,
             },
         });
-    };    
+    };
 
     return (
         <section>
             <fieldset>
-                <legend>Informação Basica</legend>
+                <legend>Informação Básica</legend>
                 <label>
                     Nome do Produto:
                     <input
                         type="text"
                         value={formData.product.name}
-                        onChange={(e) => setFormData({ ...formData, product: { ...formData.product, name: e.target.value } })}
+                        onChange={(e) => setFormData({ 
+                            ...formData, 
+                            product: { ...formData.product, name: e.target.value }
+                        })}
                         required
                     />
                 </label>
                 <label>
-                    Preço (R$):
+                    Preço Máximo (R$):
                     <input
                         type="number"
                         step="0.01" // Para permitir valores decimais
-                        value={formData.price}
+                        value={formData.max_price}
                         placeholder="0,00"
-                        onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
-                        required
-                    />
-                </label>
-                <label>
-                    Quantidade:
-                    <input
-                        type="number"
-                        value={formData.amount}
-                        onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                        onChange={(e) => setFormData({
+                            ...formData, max_price: parseFloat(e.target.value)
+                        })}
                         required
                     />
                 </label>
@@ -64,42 +59,35 @@ function ProductDetails({ formData, setFormData }) {
                         ))}
                     </select>
                 </label>
+
                 {(formData.product.category === "CPU" || formData.product.category === "GPU" || formData.product.category === "RAM") && (
                     <fieldset>
                         <legend>Overclock</legend>
                         <label>
                             <input
                                 type="checkbox"
-                                checked={formData.product.overclock.status}
+                                checked={formData.product.overclocked}
                                 onChange={(e) => setFormData({
-                                    ...formData, product: { ...formData.product, overclock: { ...formData.product.overclock, status: e.target.checked } }
+                                    ...formData, 
+                                    product: { 
+                                        ...formData.product, 
+                                        overclocked: e.target.checked
+                                    }
                                 })}
                             />
                             Overclock
                         </label>
-                        {formData.product.overclock.status && (
-                            <label>
-                                Velocidade:
-                                <input
-                                    type="text"
-                                    value={formData.product.overclock.speed}
-                                    onChange={(e) => setFormData({
-                                    ...formData, product: { ...formData.product, overclock: { ...formData.product.overclock, speed: e.target.value } }
-                                    })}
-                                    required
-                                />
-                            </label>
-                        )}
                     </fieldset>
                 )}
-                
+
                 <label>
                     Fabricante:
                     <input
                         type="text"
                         value={formData.product.manufacturer}
                         onChange={(e) => setFormData({
-                        ...formData, product: { ...formData.product, manufacturer: e.target.value }
+                            ...formData, 
+                            product: { ...formData.product, manufacturer: e.target.value }
                         })}
                         required
                     />
@@ -110,7 +98,8 @@ function ProductDetails({ formData, setFormData }) {
                         type="text"
                         value={formData.product.brand}
                         onChange={(e) => setFormData({
-                        ...formData, product: { ...formData.product, brand: e.target.value }
+                            ...formData, 
+                            product: { ...formData.product, brand: e.target.value }
                         })}
                         required
                     />
@@ -133,4 +122,4 @@ function ProductDetails({ formData, setFormData }) {
     );
 }
 
-export default ProductDetails;
+export default BuyProductDetails;

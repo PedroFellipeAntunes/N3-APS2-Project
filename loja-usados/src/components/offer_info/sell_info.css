@@ -162,3 +162,13 @@
   color: #333;
   margin: 0;
 }
+
+.sell-info .offer-desc {
+  min-width: 100%;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+  padding: 0.5em;
+  color: #333;
+  text-align: left;
+}

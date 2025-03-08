@@ -1,16 +1,17 @@
-import { usageCategories, usageTypes } from "../../../services/options";
+import { usageCategories, usageTypes, filterUsageCategories } from "../../../services/options";
 
 function UsageDetails({ formData, setFormData }) {
     const handleUsageCategoryChange = (e) => {
         const selectedCategory = e.target.value;
-        
+
         setFormData({
             ...formData,
             product: {
                 ...formData.product,
                 usage_category: selectedCategory,
-                usage_time_months: selectedCategory === "Novo" || selectedCategory === "Caixa Aberta" ? "" : formData.product.usage_time_months,
-                usage_type: selectedCategory === "" || selectedCategory === "Novo" || selectedCategory === "Caixa Aberta" ? [] : formData.product.usage_type, // Resetar os checkboxes
+                // Limpar o tempo de uso e tipo de uso se a categoria não fizer match com o array filterUsageCategories
+                usage_time_months: !filterUsageCategories.includes(selectedCategory) ? "" : formData.product.usage_time_months,
+                usage_type: !filterUsageCategories.includes(selectedCategory) ? [] : formData.product.usage_type, // Resetar os checkboxes
             },
         });
     };
@@ -31,6 +32,9 @@ function UsageDetails({ formData, setFormData }) {
             };
         });
     };
+
+    // Verificar se a categoria de uso selecionada faz match com qualquer item em filterUsageCategories
+    const showUsageFields = filterUsageCategories.some(category => category === formData.product.usage_category);
 
     return (
         <section>
@@ -53,7 +57,8 @@ function UsageDetails({ formData, setFormData }) {
                         </select>
                     </label>
 
-                    {formData.product.usage_category && formData.product.usage_category !== "Novo" && formData.product.usage_category !== "Caixa Aberta" && (
+                    {/* Exibe o campo de tempo de uso caso a categoria de uso permita */}
+                    {showUsageFields && (
                         <label>
                             Tempo de Uso (meses):
                             <input
@@ -66,7 +71,8 @@ function UsageDetails({ formData, setFormData }) {
                     )}
                 </section>
 
-                {formData.product.usage_category && formData.product.usage_category !== "Novo" && formData.product.usage_category !== "Caixa Aberta" && (
+                {/* Exibe o campo de tipo de uso caso a categoria de uso permita */}
+                {showUsageFields && (
                     <section>
                         <fieldset className="form-usage-types">
                             <legend>Tipos de uso (Selecione ao menos um)</legend>
