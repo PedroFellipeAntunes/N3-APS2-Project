@@ -3,7 +3,7 @@ export const categories = [
 ];
 
 export const usageCategories = [
-    "Novo", "Usado", "Reparado", "Quebrado"
+    "Novo", "Caixa Aberta", "Usado", "Reparado", "Quebrado"
 ];
 
 export const usageTypes = [

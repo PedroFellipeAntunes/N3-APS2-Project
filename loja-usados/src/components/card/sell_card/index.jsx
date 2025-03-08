@@ -5,10 +5,10 @@ import "./index.css";
 export function SellCard({ offer }) {
     const [imageError, setImageError] = useState(false);  // Estado para verificar erro no carregamento da imagem
 
-    const formattedPrice = (offer.price / 100).toLocaleString("pt-BR", {
+    const formattedPrice = parseFloat(offer.price).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
-    });
+    });        
 
     const isNegotiable = offer.negotiable;
     const usageTypes = offer.product.usage_type || [];

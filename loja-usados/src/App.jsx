@@ -56,9 +56,10 @@ function App() {
         "usage_category": "Reparado",
         "usage_time_months": 3,
         "usage_type": ["Gaming"],
-        "overclocked": true, //GPU only stuff
-        "vram": "8gb",
-        "clock_speed": "1607MHz",
+        "overclocked": {
+          "status": true,
+          "speed": "1607MHz",
+        },
         "repaired": {
           "status": true,
           "description": "Fucked"

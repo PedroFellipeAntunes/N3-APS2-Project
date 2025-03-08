@@ -7,19 +7,22 @@ function buildOfferQuery(params) {
 
     // Filtrando por preço mínimo e máximo
     if (params.min_price) {
+        const minPrice = Math.ceil(parseFloat(params.min_price) * 100);  // Multiplica por 100 e arredonda para cima
         if (params.type === "sell") {
-            query.price = { $gte: parseInt(params.min_price) };
+            query.price = { $gte: minPrice };  // Converte para Int32
         } else {
-            query.max_price = { $gte: parseInt(params.min_price) };
+            query.max_price = { $gte: minPrice };  // Converte para Int32
         }
     }
+    
     if (params.max_price) {
+        const maxPrice = Math.ceil(parseFloat(params.max_price) * 100);  // Multiplica por 100 e arredonda para cima
         if (params.type === "sell") {
-            query.price = { ...query.price, $lte: parseInt(params.max_price) };
+            query.price = { ...query.price, $lte: maxPrice };  // Converte para Int32
         } else {
-            query.max_price = { ...query.max_price, $lte: parseInt(params.max_price) };
+            query.max_price = { ...query.max_price, $lte: maxPrice };  // Converte para Int32
         }
-    }
+    }    
 
     // Filtrar por localização (estado ou cidade)
     if (params.state) {

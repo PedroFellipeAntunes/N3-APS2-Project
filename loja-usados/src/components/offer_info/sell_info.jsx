@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./index.css";
+import "./sell_info.css";
 
 export function SellInfo({ offer }) {
   const [imageError, setImageError] = useState(false);
@@ -8,6 +8,11 @@ export function SellInfo({ offer }) {
   if (!offer) {
     return <p>Carregando...</p>;
   }
+
+  const formattedPrice = parseFloat(offer.price).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
 
   const imageSrc = offer.images?.[currentImageIndex] && !imageError ? offer.images[currentImageIndex] : "/images/default.jpg";
 
@@ -43,7 +48,7 @@ export function SellInfo({ offer }) {
           <h1 className="product-name">{offer.product.name}</h1>
           <div className="basic-info-text">
             <h2>{offer.negotiable ? "✅ Oferta Negociável" : ""}</h2>
-            <h1>Preço: R$ {(offer.price / 100).toFixed(2)}</h1>
+            <h1>Preço: {formattedPrice}</h1>
           </div>
         </div>
       </div>

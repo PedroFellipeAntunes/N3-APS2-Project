@@ -1,4 +1,4 @@
-.viewOffer_main {
+.viewOffer_main, .createOffer_main {
     margin: 0;
     color: #333;
     background-color: #f8f8f8;
@@ -11,7 +11,60 @@
     flex-grow: 1;
 }
 
-.viewOffer_main div {
+.viewOffer_main div, .createOffer_main div {
     flex-grow: 1;
     text-align: center;
+}
+
+.createOffer_main .offerTypeSelection .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.createOffer_main .offerTypeSelection .buttons button {
+    background-color: #333;
+    color: white;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 1em;
+    border-radius: 3px;
+    border: 0;
+    flex-grow: 1;
+}
+
+.createOffer_main .offerTypeSelection .buttons button:hover {
+    background-color: #fb8c00;
+    cursor: pointer;
+}
+
+.createOffer_main .offerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.createOffer_main .offerForm .go-back {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.createOffer_main .offerForm .go-back button {
+    background-color: #333;
+    color: white;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 1em;
+    border-radius: 3px;
+    border: 0;
+    width: 25%;
+}
+
+.createOffer_main .offerForm .go-back button:hover {
+    background-color: #fb8c00;
+    cursor: pointer;
 }

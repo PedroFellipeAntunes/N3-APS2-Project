@@ -107,14 +107,14 @@ export const SearchBar = ({ onSearch, initialProductName  }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const adjustedFilters = {
-            ...filters,
-            min_price: filters.min_price ? Math.ceil(parseFloat(filters.min_price) * 100) : "",
-            max_price: filters.max_price ? Math.ceil(parseFloat(filters.max_price) * 100) : ""
-        };
+        // const adjustedFilters = {
+        //     ...filters,
+        //     min_price: filters.min_price ? Math.ceil(parseFloat(filters.min_price) * 100) : "",
+        //     max_price: filters.max_price ? Math.ceil(parseFloat(filters.max_price) * 100) : ""
+        // };
 
         const filteredFilters = Object.fromEntries(
-            Object.entries(adjustedFilters).filter(([_, value]) => value !== "" && value !== false)
+            Object.entries(filters).filter(([_, value]) => value !== "" && value !== false)
         );
 
         console.log("Filtros aplicados:", filteredFilters);

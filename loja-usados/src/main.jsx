@@ -8,6 +8,7 @@ import Home from './pages/home/Home.jsx'
 import NotFound from './pages/not_found/NotFound.jsx';
 import Offer from './pages/offer/ViewOffer.jsx';
 import Search from './pages/search/Search.jsx';
+import CreateOffer from './pages/offer/CreateOffer.jsx';
 import App from "./App.jsx";
 
 createRoot(document.getElementById('root')).render(
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<Home />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/create_offer" element={<CreateOffer />} />
         <Route path="/search" element={<Search />} />
       </Routes>
     </BrowserRouter>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import "./index.css";
 
 export function BuyCard({ offer, onFilterClick }) {
-    const formattedPrice = (offer.max_price / 100).toLocaleString("pt-BR", {
+    const formattedPrice = parseFloat(offer.max_price).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
     });

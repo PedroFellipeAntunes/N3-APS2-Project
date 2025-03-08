@@ -17,6 +17,14 @@ offerRoutes.route("/offer").get(async (request, response) => {
         let data = await db.collection("offer").find(query).toArray();
 
         if (data.length > 0) {
+            data.forEach(item => {
+                if (item.type === "buy") {
+                    item.max_price = (item.max_price / 100).toFixed(2); 
+                } else {
+                    item.price = (item.price / 100).toFixed(2); 
+                }
+            });
+
             response.json(data);
         } else {
             response.status(404).json({ error: "Nenhuma oferta encontrada." });
@@ -32,7 +40,14 @@ offerRoutes.route("/offer/:id").get(async (request, response) => {
         let db = database.getDb();
         let data = await db.collection("offer").findOne({_id: new ObjectId(request.params.id)});
 
-        if (Object.keys(data.length > 0)) {
+        if (data) {
+            // Convert price from int32 to double before sending it in the response
+            if (data.type === "buy") {
+                data.max_price = (data.max_price / 100).toFixed(2); // Converts to double
+            } else {
+                data.price = (data.price / 100).toFixed(2); // Converts to double
+            }
+
             response.json(data);
         } else {
             response.status(404).json({ error: "Nenhuma oferta encontrada." });
@@ -51,7 +66,7 @@ offerRoutes.route("/offer").post(async (request, response) => {
         mongoObject = {
             "user_id": new ObjectId(request.body.user_id),
             "type": "buy",
-            "max_price": new Int32(request.body.max_price),
+            "max_price": new Int32(Math.round(request.body.max_price * 100)),
             "negotiable": request.body.negotiable,
             "created_at": new Date(),
             "location": request.body.location,
@@ -63,7 +78,7 @@ offerRoutes.route("/offer").post(async (request, response) => {
         mongoObject = {
             "user_id": new ObjectId(request.body.user_id),
             "type": "sell",
-            "price": new Int32(request.body.price),
+            "price": new Int32(Math.round(request.body.price * 100)),
             "amount": new Int32(request.body.amount),
             "negotiable": request.body.negotiable,
             "created_at": new Date(),
@@ -89,7 +104,7 @@ offerRoutes.route("/offer/:id").put(async (request, response) => {
             $set: {
                 "user_id": new ObjectId(request.body.user_id),
                 "type": "buy",
-                "max_price": new Int32(request.body.max_price),
+                "max_price": new Int32(Math.round(request.body.max_price * 100)),
                 "negotiable": request.body.negotiable,
                 "created_at": new Date(request.body.date),
                 "location": request.body.location,
@@ -103,7 +118,7 @@ offerRoutes.route("/offer/:id").put(async (request, response) => {
             $set: {
                 "user_id": new ObjectId(request.body.user_id),
                 "type": "sell",
-                "price": new Int32(request.body.price),
+                "price": new Int32(Math.round(request.body.price * 100)),
                 "amount": new Int32(request.body.amount),
                 "negotiable": request.body.negotiable,
                 "created_at": new Date(request.body.date),
