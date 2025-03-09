@@ -41,6 +41,7 @@ header .buttons {
 }
   
 header button {
+    /* height: 100%; */
     padding: 0.5em 1em;
     font-size: 16px;
     border-radius: 3px;
@@ -54,4 +55,8 @@ header button {
 
 header button:hover {
     background-color: #fb8c00;
+}
+
+header a {
+    display: flex;
 }

@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './index.css';
+import axios from 'axios';
 
 export const Header = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [userToken, setUserToken] = useState(null);
+
+  // Verifique se existe um token de usuário
+  useEffect(() => {
+    const token = sessionStorage.getItem("user");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      setUserToken(token);
+    }
+  }, []);
 
   const handleSearch = () => {
     // Sempre redireciona para a página de busca, mesmo se estiver vazio
@@ -16,6 +27,14 @@ export const Header = () => {
       e.preventDefault(); // Previne o comportamento padrão do Enter
       handleSearch();
     }
+  };
+
+  const handleLogout = () => {
+    // Apaga o token do sessionStorage e redireciona para a Home
+    sessionStorage.removeItem("user");
+    axios.defaults.headers.common["Authorization"] = '';
+    setUserToken(null);
+    navigate('/');
   };
 
   return (
@@ -38,8 +57,21 @@ export const Header = () => {
         </button>
       </div>
       <div className="buttons">
-        <button className="cart_button">Carrinho</button>
-        <button className="user_button">Usuário</button>
+      <button className="cart_button">Carrinho</button>
+        {userToken ? (
+          <>
+            <Link to="/user">
+              <button className="account_button">Conta</button>
+            </Link>
+            <button className="logout_button" onClick={handleLogout}>
+              Sair
+            </button>
+          </>
+        ) : (
+          <Link to="/login">
+            <button className="login_button">Login</button>
+          </Link>
+        )}
       </div>
     </header>
   );

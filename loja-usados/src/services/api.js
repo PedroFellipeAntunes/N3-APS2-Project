@@ -10,8 +10,21 @@ export async function getOffers() {
         if (error.response && error.response.status === 404) {
             return [];
         }
-        console.error("Erro ao buscar ofertas de venda:", error);
+        console.error("Erro ao buscar ofertas:", error);
         return [];
+    }
+}
+
+export async function getOffersByUser(user_id) {
+    try {
+        const response = await axios.get(`${URL}/offer/${user_id}`);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            return null;
+        }
+        console.error("Erro ao buscar ofertas:", error);
+        return null;
     }
 }
 
@@ -23,7 +36,7 @@ export async function getOffer(id) {
         if (error.response && error.response.status === 404) {
             return null;
         }
-        console.error("Erro ao buscar oferta de venda:", error);
+        console.error("Erro ao buscar oferta:", error);
         return null;
     }
 }
@@ -37,7 +50,7 @@ export async function getOffersWithFilters(filters) {
         if (error.response && error.response.status === 404) {
             return [];
         }
-        console.error("Erro ao buscar ofertas de venda com filtros:", error);
+        console.error("Erro ao buscar ofertas com filtros:", error);
         return [];
     }
 }
@@ -46,7 +59,7 @@ export async function createOffer(offer) {
     try {
         return await axios.post(`${URL}/offer`, offer);
     } catch (error) {
-        console.error("Erro ao criar oferta de venda:", error);
+        console.error("Erro ao criar oferta:", error);
         throw error;
     }
 }
@@ -55,7 +68,7 @@ export async function updateOffer(id, offer) {
     try {
         return await axios.put(`${URL}/offer/${id}`, offer);
     } catch (error) {
-        console.error("Erro ao atualizar oferta de venda:", error);
+        console.error("Erro ao atualizar oferta:", error);
         throw error;
     }
 }
@@ -64,7 +77,7 @@ export async function deleteOffer(id) {
     try {
         return await axios.delete(`${URL}/offer/${id}`);
     } catch (error) {
-        console.error("Erro ao excluir oferta de venda:", error);
+        console.error("Erro ao excluir oferta:", error);
         throw error;
     }
 }
@@ -86,37 +99,50 @@ export async function deleteOffer(id) {
 export async function getUser(id) {
     try {
         const response = await axios.get(`${URL}/user/${id}`);
+
         return response.data;
     } catch (error) {
         if (error.response && error.response.status === 404) {
             return null;
         }
+
         console.error("Erro ao buscar usuario:", error);
+        
         return null;
     }
 }
 
-// export async function getUserWithFilters(filters) {
-//     const queryParams = new URLSearchParams(filters).toString();
-//     try {
-//         const response = await axios.get(`${URL}/user?${queryParams}`);
-//         return response.data;
-//     } catch (error) {
-//         if (error.response && error.response.status === 404) {
-//             return [];
-//         }
-//         console.error("Erro ao buscar usuarios com filtros:", error);
-//         return [];
-//     }
-// }
+export async function getUserWithFilters(filters) {
+    const queryParams = new URLSearchParams(filters).toString();
+
+    try {
+        const response = await axios.get(`${URL}/user?${queryParams}`);
+        
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            return null;
+        }
+
+        console.error("Erro ao buscar usuarios com filtros:", error);
+
+        return null;
+    }
+}
+
+export async function verifyUser(user) {
+    const response = await axios.post(`${URL}/user/login`, user);
+    console.log(response);
+    if (response.data.success) {
+        return response.data.token;
+    } else {
+        return;
+    }
+}
 
 export async function createUser(user) {
-    try {
-        return await axios.post(`${URL}/user`, user);
-    } catch (error) {
-        console.error("Erro ao criar usuario:", error);
-        throw error;
-    }
+    const response = await axios.post(`${URL}/user`, user);
+    return response;
 }
 
 export async function updateUser(id, user) {
