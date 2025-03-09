@@ -1,0 +1,47 @@
+.user-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    border-radius: 6px;
+    padding: 2em;
+    width: 100%;
+    gap: 0.5em;
+}
+
+.user-info .top-area h1,
+.user-info .top-area h2 {
+    margin: 0;
+    color: #f8f8f8;
+}
+
+.user-info .top-area .user-data {
+    margin-left: 1em;
+}
+
+.user-info .price-value {
+    color: #333;
+}
+
+.user-info .group {
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 100%;
+    max-height: 30rem;
+    overflow-y: scroll;
+}
+
+.user-info .group .empty-search {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.user-info .bottom-area .title {
+    color: #f8f8f8;
+}
+
+.user-info .bottom-area section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

@@ -36,10 +36,10 @@ function BuyProductDetails({ formData, setFormData }) {
                     <input
                         type="number"
                         step="0.01" // Para permitir valores decimais
-                        value={formData.max_price}
+                        value={formData.price}
                         placeholder="0,00"
                         onChange={(e) => setFormData({
-                            ...formData, max_price: parseFloat(e.target.value)
+                            ...formData, price: parseFloat(e.target.value)
                         })}
                         required
                     />

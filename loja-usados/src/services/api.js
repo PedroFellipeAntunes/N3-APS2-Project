@@ -17,7 +17,7 @@ export async function getOffers() {
 
 export async function getOffersByUser(user_id) {
     try {
-        const response = await axios.get(`${URL}/offer/${user_id}`);
+        const response = await axios.get(`${URL}/offer/user/${user_id}`);
         return response.data;
     } catch (error) {
         if (error.response && error.response.status === 404) {

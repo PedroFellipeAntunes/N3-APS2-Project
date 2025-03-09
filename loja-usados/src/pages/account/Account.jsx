@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { getOffersByUser } from '../../services/api';
-
 import { Header } from '../../components/header';
 import { Footer } from '../../components/footer';
 
 import { UserInfo } from '../../components/user_info/user_info';
 
 // import jwt_decode from 'jsonwebtoken';
+import { jwtDecode } from 'jwt-decode';
 
 import './index.css';
 
@@ -18,21 +17,27 @@ export default function Account() {
 
     useEffect(() => {
         async function loadUserData() {
-            // const token = sessionStorage.getItem("user");
-            // const decodedUser = jwt_decode(token);
-            // const allOffers = getOffersByUser(user._id);
+            const token = sessionStorage.getItem("user");
 
-            // console.log(allOffers);
+            if (token) {
+                const decodedUser = jwtDecode(token);
+                setUser(decodedUser);
+            }
         }
 
         loadUserData();
     }, []);
 
+    useEffect(() => {
+        console.log(offers);
+    }, [offers]); // Executa quando `offers` muda
+    
+
     return (
         <>
             <Header />
             <main className='account_main'>
-                <UserInfo />
+                <UserInfo user={user} offers={offers} setOffers={setOffers} />
             </main>
             <Footer />
         </>

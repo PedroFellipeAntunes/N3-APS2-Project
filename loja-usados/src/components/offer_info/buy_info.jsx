@@ -6,7 +6,7 @@ export function BuyInfo({ offer }) {
     return <p>Carregando...</p>;
   }
 
-  const formattedPrice = parseFloat(offer.max_price).toLocaleString("pt-BR", {
+  const formattedPrice = parseFloat(offer.price).toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });

@@ -12,7 +12,7 @@ import "./index.css";
 export default function BuyOfferForm() {
   const [formData, setFormData] = useState({
     type: "buy",
-    max_price: "",
+    price: "",
     location: {
       state: "",
       city: "",

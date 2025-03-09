@@ -54,7 +54,6 @@ userRoutes.route("/user").post(async (request, response) => {
     const takenCPF = await db.collection("user").findOne({"cpf": request.body.cpf});
 
     if (takenEmail || takenCPF) {
-        console.log("Email ou CPF já usados")
         response.json({message: "Email ou CPF já usados"});
     } else {
         const hash = await bcrypt.hash(request.body.password, SALT_ROUNDS);
@@ -123,7 +122,8 @@ userRoutes.route("/user/login").post(async (request, response) => {
 
         if (confirmation) {
             //Optional, after SECRET_KEY ,expiresIn: "1h"});
-            const token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "1h"});
+            //const token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "1h"});
+            const token = jwt.sign(user, process.env.SECRET_KEY);
             response.json({success: true, token});
         } else {
             response.json({success: false, message: "Senha errada"});

@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom';
 import "./index.css";
 
-export function BuyCard({ offer, onFilterClick }) {
-    const formattedPrice = parseFloat(offer.max_price).toLocaleString("pt-BR", {
+export function BuyCard({ offer }) {
+    const formattedPrice = parseFloat(offer.price).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
     });
 
     const usageTypes = offer.product.usage_type || [];
     const usageCategories = offer.product.usage_categories || [];
-
-    // Funções que lidam com os cliques
-    const handleFilterClick = (filterType, value) => {
-        onFilterClick(filterType, value);  // Chama a função de filtro recebida como parâmetro
-    };
 
     const renderUsageCategories = () => {
         const limitedUsageCategories = usageCategories.slice(0, 4);  // Considera apenas os primeiros 4 tipos de uso
