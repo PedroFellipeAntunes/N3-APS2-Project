@@ -1,0 +1,97 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+  
+.modal-content {
+    background: #333;
+    padding: 2em;
+    border-radius: 0.375rem; /* Aproximadamente 6px */
+    text-align: center;
+    border: 0.2rem solid #f8f8f8; /* Aproximadamente 3px */
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3); /* 4px e 12px convertidos */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Aproximadamente 50px */
+    max-width: 70%;
+    max-height: 80%;
+    /* overflow-y: auto; */
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.confirm-btn,
+.cancel-btn {
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 0.5em;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.confirm-btn:hover,
+.cancel-btn:hover {
+    background-color: #fb8c00;
+    color: #f8f8f8;
+    cursor: pointer;
+}
+
+/* .cancel-btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+} */
+
+.auction-offer-selection {
+    max-height: 20em; /* Ajuste a altura conforme necessário */
+    overflow: scroll;  /* Impede que qualquer conteúdo ultrapasse os limites */
+    padding: 10px;
+    border: 1px solid #ccc; /* Opcional: adicione uma borda para demarcar o contêiner */
+    border-radius: 6px; /* Opcional: bordas arredondadas */
+    background-color: #f9f9f9; /* Opcional: cor de fundo */
+}
+
+.auction-offer-selection h1 {
+    color: #333;
+}
+
+.auction-offer-selection .empty-search h1 {
+    color: #f8f8f8;
+}
+
+.auction-offer-selection .group {
+    max-height: 100%; /* Para garantir que o group ocupe toda a altura disponível */
+    /* overflow-y: auto; Adiciona o scroll vertical quando necessário */
+    display: flex;
+    border-top-left-radius: 6px;
+    flex-direction: column;
+}
+
+.empty-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 16px;
+    color: #333;
+}

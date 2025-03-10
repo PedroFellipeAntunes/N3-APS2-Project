@@ -50,6 +50,7 @@ export function SellInfo({ offer }) {
             <h2>{offer.negotiable ? "✅ Oferta Negociável" : ""}</h2>
             <h1>Preço: {formattedPrice}</h1>
           </div>
+          <button className="btn-comprar">Comprar</button>
         </div>
       </div>
 

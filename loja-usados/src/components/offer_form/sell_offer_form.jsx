@@ -11,7 +11,7 @@ import ImageUpload from './form_section/image_upload';
 
 import "./index.css";
 
-export default function SellOfferForm() {
+export default function SellOfferForm( {handleReturn} ) {
   // const [formData, setFormData] = useState({
   //   // Defina o estado completo aqui como já está no seu código
   // });
@@ -101,7 +101,7 @@ export default function SellOfferForm() {
 
       if (response.status === 200) { // Verifica se foi criado com sucesso
         alert("Oferta criada com sucesso!");
-
+        handleReturn();
         // Deve redirecionar para a pagina de ofertas do USER
         // navigate("/minhas-ofertas");
       } else {

@@ -1,0 +1,50 @@
+.auction-card {
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    display: flex;
+    padding: 0.5em;
+    padding-inline: 1.5em;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    flex-wrap: wrap;
+}
+
+.auction-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.auction-card .card-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.auction-card .price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auction-card .product-name {
+    max-width: 50%; /* Defina o tamanho máximo que deseja */
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse o limite */
+    text-overflow: ellipsis; /* Adiciona os "..." quando o texto for muito grande */
+}
+
+/* Efeito para destacar o card selecionado */
+.auction-card.selected {
+    background-color: #fb8c00;
+    color: #f8f8f8;
+}
+
+/* Força a cor dos textos internos */
+.auction-card.selected h1,
+.auction-card.selected h2 {
+    color: #f8f8f8;
+}

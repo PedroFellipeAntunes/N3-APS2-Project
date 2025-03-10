@@ -1,5 +1,19 @@
+const ObjectId = require('mongodb').ObjectId;
+
 function buildOfferQuery(params) {
     let query = {};
+
+    if (params._id) {
+        // Verifica se params._id é um array (se foi enviado corretamente pelo frontend)
+        const idsArray = Array.isArray(params._id) ? params._id : params._id.split(",");
+    
+        // Converte cada string em um ObjectId
+        query["_id"] = { $in: idsArray.map(id => new ObjectId(id)) };
+    }
+
+    if (params.user_id) {
+        query["user_id"] = params.user_id;
+    }
 
     if (params.type) {
         query["type"] = params.type;
@@ -106,7 +120,7 @@ function buildOfferQuery(params) {
         query.created_at = { $gte: new Date(params.created_after) };
     }
 
-    // console.log(query);
+    console.log(query);
 
     return query;
 }

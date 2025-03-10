@@ -14,7 +14,7 @@ import axios from 'axios';
 
 function App() {
   useEffect(() => {
-    let token = sessionStorage.getItem("user");
+    let token = localStorage.getItem("user");
 
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
@@ -29,7 +29,7 @@ function App() {
       <Route path="/create_offer" element={<CreateOffer />} />
       <Route path="/search" element={<Search />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/user" element={<Account />} />
+      <Route path="/account" element={<Account />} />
     </Routes>
   );
 }

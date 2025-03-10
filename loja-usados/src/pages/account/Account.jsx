@@ -9,15 +9,27 @@ import { UserInfo } from '../../components/user_info/user_info';
 // import jwt_decode from 'jsonwebtoken';
 import { jwtDecode } from 'jwt-decode';
 
+import { useNavigate } from 'react-router-dom';
+
 import './index.css';
 
 export default function Account() {
+    const token = localStorage.getItem("user");
+    const navigate = useNavigate();
+
+    // Verifique se existe um token de usuário, se não existir volte para home
+    useEffect(() => {
+        if (!token) {
+        navigate("/");
+        }
+    }, [token]);
+
     const [offers, setOffers] = useState([]);
     const [user, setUser] = useState({});
 
     useEffect(() => {
         async function loadUserData() {
-            const token = sessionStorage.getItem("user");
+            const token = localStorage.getItem("user");
 
             if (token) {
                 const decodedUser = jwtDecode(token);

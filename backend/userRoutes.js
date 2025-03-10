@@ -65,11 +65,11 @@ userRoutes.route("/user").post(async (request, response) => {
             "join_date": new Date(),
             "cpf": request.body.cpf,
             "cep": request.body.cep,
-            "offers": [],
             "ban": {
                 "status": false,
                 "description": ""
-            }
+            },
+            "blocked": []
         };
 
         let data = await db.collection("user").insertOne(mongoObject);
@@ -90,11 +90,11 @@ userRoutes.route("/user/:id").put(async (request, response) => {
             "join_date": new Date(request.body.join_date),
             "cpf": request.body.cpf,
             "cep": request.body.cep,
-            "offers": request.body.offers,
             "ban": {
                 "status": request.body.ban.status,
                 "description": request.body.ban.description
-            }
+            },
+            "blocked": request.body.blocked
         }
     };
 

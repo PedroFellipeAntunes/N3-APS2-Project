@@ -97,7 +97,7 @@
     box-sizing: border-box;
 }
 
-.price-value {
+.price .price-value {
     font-size: 26px;
     font-weight: bold;
     margin: 0;

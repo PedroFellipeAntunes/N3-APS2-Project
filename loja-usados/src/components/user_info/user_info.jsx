@@ -20,6 +20,10 @@ export function UserInfo({ user, offers, setOffers }) {
                 const userOffers = await getOffersByUser(user._id);
                 setOffers(userOffers);
 
+                if (!userOffers) {
+                    return;
+                }
+
                 const sell = userOffers.filter((offer) => offer.type === "sell");
                 const buy = userOffers.filter((offer) => offer.type === "buy");
 

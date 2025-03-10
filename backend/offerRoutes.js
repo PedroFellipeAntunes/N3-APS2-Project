@@ -102,7 +102,21 @@ offerRoutes.route("/offer/:id").put(verifyToken, async (request, response) => {
     let db = database.getDb();
     let offerType = request.body.type;
 
+    if (!offerType) {
+        return;
+    }
+
     if (offerType === "buy") {
+        console.log(offerType);
+        console.log("Auction IDS:", request.body.auction);
+        // Converte os IDs do auction para ObjectId antes de criar mongoObject
+        const auctionIds = Array.isArray(request.body.auction) 
+            ? request.body.auction.map(id => new ObjectId(id)) 
+            : [];
+        
+        // Exibe o array convertido no console
+        console.log("Auction IDs convertidos:", auctionIds);
+
         mongoObject = {
             $set: {
                 "user_id": new ObjectId(request.body.user_id),
@@ -113,10 +127,11 @@ offerRoutes.route("/offer/:id").put(verifyToken, async (request, response) => {
                 "location": request.body.location,
                 "retrival": request.body.retrival,
                 "product": request.body.product,
-                "auction": request.body.auction || []
+                "auction": auctionIds // Usa a variável já convertida
             }
         };
     } else {
+        console.log("erro")
         mongoObject = {
             $set: {
                 "user_id": new ObjectId(request.body.user_id),

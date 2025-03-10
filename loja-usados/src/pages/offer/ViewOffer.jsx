@@ -1,6 +1,6 @@
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
-import { getOffer } from "../../services/api";
+import { getOffer, getOffersByUser } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SellInfo } from "../../components/offer_info/sell_info";
@@ -12,6 +12,7 @@ export default function ViewOffer() {
   const { id } = useParams();
   const [offer, setOffer] = useState(null);
 
+  // Carregar a oferta da pagina em si
   useEffect(() => {
     async function loadSellOffer() {
       try {

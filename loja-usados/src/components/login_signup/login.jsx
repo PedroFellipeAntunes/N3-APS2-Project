@@ -34,7 +34,7 @@ export function Login() {
 
         if (response) {
             navigate("/");
-            sessionStorage.setItem("user", response);
+            localStorage.setItem("user", response);
             axios.defaults.headers.common["Authorization"] = `Bearer ${response}`
         } else {
             alert("Login falhou");

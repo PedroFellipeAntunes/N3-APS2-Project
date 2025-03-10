@@ -10,7 +10,7 @@ export const Header = () => {
 
   // Verifique se existe um token de usuário
   useEffect(() => {
-    const token = sessionStorage.getItem("user");
+    const token = localStorage.getItem("user");
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setUserToken(token);
@@ -31,7 +31,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     // Apaga o token do sessionStorage e redireciona para a Home
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user");
     axios.defaults.headers.common["Authorization"] = '';
     setUserToken(null);
     navigate('/');
@@ -57,10 +57,12 @@ export const Header = () => {
         </button>
       </div>
       <div className="buttons">
-      <button className="cart_button">Carrinho</button>
         {userToken ? (
           <>
-            <Link to="/user">
+            <Link to="/create_offer">
+              <button className="cart_button">Criar Oferta</button>
+            </Link>
+            <Link to="/account">
               <button className="account_button">Conta</button>
             </Link>
             <button className="logout_button" onClick={handleLogout}>

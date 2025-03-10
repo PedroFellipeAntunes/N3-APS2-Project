@@ -9,7 +9,7 @@ import RetrievalOptions from './form_section/retrieval_details';
 
 import "./index.css";
 
-export default function BuyOfferForm() {
+export default function BuyOfferForm( {handleReturn} ) {
   const [formData, setFormData] = useState({
     type: "buy",
     price: "",
@@ -62,6 +62,7 @@ export default function BuyOfferForm() {
 
       if (response.status === 200) {
         alert("Oferta de compra criada com sucesso!");
+        handleReturn();
         // Redirecionar ou limpar o formulário
       } else {
         alert("Erro ao criar oferta. Tente novamente.");

@@ -12,7 +12,7 @@ import "./index.css";
 export default function CreateOffer() {
   const [offerType, setOfferType] = useState(null);
 
-  const token = sessionStorage.getItem("user");
+  const token = localStorage.getItem("user");
   const navigate = useNavigate();
 
   // Verifique se existe um token de usuário, se não existir volte para home
@@ -21,6 +21,10 @@ export default function CreateOffer() {
       navigate("/");
     }
   }, [token]);
+
+  const handleReturn = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -39,7 +43,7 @@ export default function CreateOffer() {
             <div className="go-back">
                 <button onClick={() => setOfferType(null)} className="backButton">Voltar</button>
             </div>
-            {offerType === "sell" ? <SellOfferForm /> : <BuyOfferForm />}
+            {offerType === "sell" ? <SellOfferForm handleReturn={handleReturn} /> : <BuyOfferForm handleReturn={handleReturn} />}
           </div>
         )}
       </main>
