@@ -4,7 +4,7 @@ import { formatCPF, formatCEP } from "../../services/formatData";
 
 import "./index.css";
 
-export function SignUp() {
+export function SignUp( {setIsSignUp} ) {
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -81,11 +81,19 @@ export function SignUp() {
         }
 
         let response = await createUser(user); // Agora esperamos a resposta do backend
-        console.log(response);
+        
+        if (response.data.message) {
+            alert(response.data.message);
+            return;
+        }
         
         if (response.status !== 200) {
             alert("Não foi possivel criar usuario");
+            return;
         }
+
+        alert("Cadastro realizado com sucesso!");
+        setIsSignUp(false);
     };
 
     return (

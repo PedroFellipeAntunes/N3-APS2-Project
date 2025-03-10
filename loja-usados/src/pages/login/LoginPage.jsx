@@ -15,7 +15,7 @@ export default function LoginPage() {
                 {isSignUp ? (
                     <>
                         <p>Já tem uma conta? <button className='change-login' onClick={() => setIsSignUp(false)}>Fazer Login</button></p>
-                        <SignUp />
+                        <SignUp setIsSignUp={setIsSignUp} />
                     </>
                 ) : (
                     <>

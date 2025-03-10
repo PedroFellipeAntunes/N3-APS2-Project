@@ -112,6 +112,22 @@ export async function getUser(id) {
     }
 }
 
+export async function getUserName(id) {
+    try {
+        const response = await axios.get(`${URL}/user_name/${id}`);
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            return null;
+        }
+
+        console.error("Erro ao buscar usuario:", error);
+        
+        return null;
+    }
+}
+
 export async function getUserWithFilters(filters) {
     const queryParams = new URLSearchParams(filters).toString();
 

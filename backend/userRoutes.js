@@ -133,4 +133,20 @@ userRoutes.route("/user/login").post(async (request, response) => {
     }
 });
 
+//7 Get user NAME ONLY
+userRoutes.route("/user_name/:id").get(async (request, response) => {
+    try {
+        let db = database.getDb();
+        let data = await db.collection("user").findOne({_id: new ObjectId(request.params.id)});
+
+        if (data) {
+            response.json(data.name);
+        } else {
+            response.status(404).json({ error: "Nenhum user encontrada." });
+        }
+    } catch (error) {
+        response.status(500).json({ error: "Erro ao buscar user" });
+    }
+});
+
 module.exports = userRoutes;

@@ -68,3 +68,21 @@
     background-color: #fb8c00;
     cursor: pointer;
 }
+
+.viewOffer_main .offer-user-display {
+    display: flex;
+    background-color: #333;
+    color: #f8f8f8;
+    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 6px;
+    overflow: hidden; /* Oculta o conteúdo que ultrapassa a largura */
+}
+
+.offer-user-display h2 {
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+    overflow: hidden; /* Oculta o texto que ultrapassa a largura do contêiner */
+    text-overflow: ellipsis; /* Adiciona "..." ao final do texto cortado */
+    max-width: 100%; /* Garante que o título não ultrapasse a largura do contêiner */
+}
