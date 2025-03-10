@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { verifyUser } from "../../services/api";
 import { useState } from "react";
 
+import "./index.css";
+
 import axios from 'axios';
 
 export function Login() {
@@ -43,7 +45,7 @@ export function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='login-signup-form' onSubmit={handleSubmit}>
             <section>
                 <label>
                     E-mail:
@@ -52,21 +54,20 @@ export function Login() {
 
                 <label>
                     Senha:
-                    <div>
+                    <div className='password-div'>
                         <input
                             type={passwordVisible ? "text" : "password"} // Alterna entre mostrar e ocultar a senha
                             name="password"
                             value={user.password}
                             onChange={handleChange}
-                            minLength={8}
-                            maxLength={16}
                             required
                         />
                         <button 
+                            className='show-pass'
                             type="button" 
                             onClick={() => setPasswordVisible(!passwordVisible)} // Altera a visibilidade da senha
                         >
-                            {passwordVisible ? "Ocultar" : "Mostrar"} senha
+                            {passwordVisible ? "Ocultar" : "Mostrar"}
                         </button>
                     </div>
                 </label>

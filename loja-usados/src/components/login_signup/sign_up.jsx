@@ -2,6 +2,8 @@ import { createUser } from "../../services/api";
 import { useState } from "react";
 import { formatCPF, formatCEP } from "../../services/formatData";
 
+import "./index.css";
+
 export function SignUp() {
     const [user, setUser] = useState({
         name: "",
@@ -34,7 +36,7 @@ export function SignUp() {
         const formattedCPF = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
 
         if (formattedCPF.length !== 11) {
-            setErrors((prevErrors) => ({ ...prevErrors, cpf: "CPF inválido." }));
+            setErrors((prevErrors) => ({ ...prevErrors, cpf: "CPF inválido" }));
         } else {
             setErrors((prevErrors) => ({ ...prevErrors, cpf: "" }));
         }
@@ -43,7 +45,7 @@ export function SignUp() {
     const validateCEP = async (cep) => {
         const formattedCEP = cep.replace(/\D/g, ""); // Remove caracteres não numéricos
         if (formattedCEP.length !== 8) {
-            setErrors((prevErrors) => ({ ...prevErrors, cep: "CEP inválido." }));
+            setErrors((prevErrors) => ({ ...prevErrors, cep: "CEP inválido" }));
             return;
         }
 
@@ -52,12 +54,12 @@ export function SignUp() {
             const data = await response.json();
 
             if (data.erro) {
-                setErrors((prevErrors) => ({ ...prevErrors, cep: "CEP não encontrado." }));
+                setErrors((prevErrors) => ({ ...prevErrors, cep: "CEP não encontrado" }));
             } else {
                 setErrors((prevErrors) => ({ ...prevErrors, cep: "" }));
             }
         } catch {
-            setErrors((prevErrors) => ({ ...prevErrors, cep: "Erro ao buscar CEP." }));
+            setErrors((prevErrors) => ({ ...prevErrors, cep: "Erro ao buscar CEP" }));
         }
     };
 
@@ -87,7 +89,7 @@ export function SignUp() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="login-signup-form" onSubmit={handleSubmit}>
             <section>
                 <label>
                     Nome:
@@ -101,7 +103,7 @@ export function SignUp() {
 
                 <label>
                     Senha:
-                    <div>
+                    <div className='password-div'>
                         <input
                             type={passwordVisible ? "text" : "password"} // Alterna entre mostrar e ocultar a senha
                             name="password"
@@ -112,10 +114,11 @@ export function SignUp() {
                             required
                         />
                         <button 
+                            className='show-pass'
                             type="button" 
                             onClick={() => setPasswordVisible(!passwordVisible)} // Altera a visibilidade da senha
                         >
-                            {passwordVisible ? "Ocultar" : "Mostrar"} senha
+                            {passwordVisible ? "Ocultar" : "Mostrar"}
                         </button>
                     </div>
                 </label>
