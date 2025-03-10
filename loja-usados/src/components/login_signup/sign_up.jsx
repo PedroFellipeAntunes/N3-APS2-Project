@@ -63,6 +63,8 @@ export function SignUp( {setIsSignUp} ) {
         }
     };
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -80,20 +82,29 @@ export function SignUp( {setIsSignUp} ) {
             return;
         }
 
-        let response = await createUser(user); // Agora esperamos a resposta do backend
-        
-        if (response.data.message) {
-            alert(response.data.message);
-            return;
-        }
-        
-        if (response.status !== 200) {
-            alert("Não foi possivel criar usuario");
-            return;
-        }
+        setIsLoading(true);
 
-        alert("Cadastro realizado com sucesso!");
-        setIsSignUp(false);
+        try {
+            let response = await createUser(user); // Agora esperamos a resposta do backend
+        
+            if (response.data.message) {
+                alert(response.data.message);
+                return;
+            }
+            
+            if (response.status !== 200) {
+                alert("Não foi possivel criar usuario");
+                return;
+            }
+
+            alert("Cadastro realizado com sucesso!");
+            setIsSignUp(false);
+        } catch (error) {
+            alert("Erro na requisição. Verifique sua conexão.");
+            console.error(error);
+        } finally {
+            setIsLoading(false); // Desativa o carregamento
+        }
     };
 
     return (
@@ -165,8 +176,13 @@ export function SignUp( {setIsSignUp} ) {
                 </label>
                 {errors.cep && <p className="error">{errors.cep}</p>}
             </section>
-
-            <button type="submit">Cadastrar</button>
+            
+            <button
+                type="submit"
+                disabled={isLoading}
+            >
+                {isLoading ? "Criando..." : "Cadastrar"}
+            </button>
         </form>
     );
 }

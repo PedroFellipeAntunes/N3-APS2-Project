@@ -23,8 +23,7 @@ export default function Account() {
         navigate("/");
         }
     }, [token]);
-
-    const [offers, setOffers] = useState([]);
+    
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -40,16 +39,11 @@ export default function Account() {
         loadUserData();
     }, []);
 
-    useEffect(() => {
-        console.log(offers);
-    }, [offers]); // Executa quando `offers` muda
-    
-
     return (
         <>
             <Header />
             <main className='account_main'>
-                <UserInfo user={user} offers={offers} setOffers={setOffers} />
+                <UserInfo user={user} />
             </main>
             <Footer />
         </>

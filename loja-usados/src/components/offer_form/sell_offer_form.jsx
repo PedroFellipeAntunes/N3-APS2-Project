@@ -77,6 +77,8 @@ export default function SellOfferForm( {handleReturn} ) {
     setImages(imageBase64Array);  // Defina as imagens como base64
   };
 
+  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -94,6 +96,8 @@ export default function SellOfferForm( {handleReturn} ) {
 
     // console.log(formData);
     // return;
+
+    setIsLoading(true); // Ativa o carregamento
   
     // Conectar server
     try {
@@ -110,6 +114,8 @@ export default function SellOfferForm( {handleReturn} ) {
     } catch (error) {
       alert("Erro na requisição. Verifique sua conexão.");
       console.error(error);
+    } finally {
+      setIsLoading(false); // Desativa o carregamento
     }
   };
 
@@ -125,7 +131,13 @@ export default function SellOfferForm( {handleReturn} ) {
 
       <ImageUpload images={images} setImages={setImages} handleImageUpload={handleImageUpload} />
 
-      <button className="create-form-submit" type="submit">Criar Oferta</button>
+      <button
+        className="create-form-submit"
+        type="submit"
+        disabled={isLoading} // Desativa o botão quando está carregando
+      >
+        {isLoading ? "Criando..." : "Criar Oferta"}
+      </button>
     </form>
   );
 }

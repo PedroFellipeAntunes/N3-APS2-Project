@@ -41,6 +41,8 @@ export default function BuyOfferForm( {handleReturn} ) {
     }
   });
 
+  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,6 +59,8 @@ export default function BuyOfferForm( {handleReturn} ) {
     // console.log(formData);
     // return;
 
+    setIsLoading(true); // Ativa o carregamento
+
     try {
       const response = await createOffer(formData); // Envia a oferta para o servidor
 
@@ -70,6 +74,8 @@ export default function BuyOfferForm( {handleReturn} ) {
     } catch (error) {
       alert("Erro na requisição. Verifique sua conexão.");
       console.error(error);
+    } finally {
+      setIsLoading(false); // Desativa o carregamento
     }
   };
 
@@ -83,7 +89,13 @@ export default function BuyOfferForm( {handleReturn} ) {
       <LocationDetails formData={formData} setFormData={setFormData} />
       <RetrievalOptions formData={formData} setFormData={setFormData} />
 
-      <button className="create-form-submit" type="submit">Criar Oferta</button>
+      <button
+        className="create-form-submit"
+        type="submit"
+        disabled={isLoading} // Desativa o botão quando está carregando
+      >
+        {isLoading ? "Criando..." : "Criar Oferta"}
+      </button>
     </form>
   );
 }

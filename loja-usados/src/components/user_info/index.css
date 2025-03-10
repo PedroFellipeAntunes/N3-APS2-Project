@@ -45,3 +45,24 @@
     flex-direction: column;
     gap: 1em;
 }
+
+.user-info .user-card-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info .user-card-div .delete-btn {
+    border: 0;
+    background-color: #333;
+    border-radius: 3px;
+    color: #f8f8f8;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0.25em;
+}
+
+.user-info .user-card-div .delete-btn:hover {
+    background-color: #fb8c00;
+    cursor: pointer;
+}

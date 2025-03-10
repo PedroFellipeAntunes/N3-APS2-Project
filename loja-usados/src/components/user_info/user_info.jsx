@@ -1,43 +1,57 @@
 import { useState, useEffect } from "react";
 import "./index.css";
 
-import { getOffersByUser } from '../../services/api';
+import { getOffersByUser, deleteOffer } from '../../services/api';
 
 import { SellCard } from '../../components/card/sell_card';
 import { BuyCard } from '../../components/card/buy_card';
 
-export function UserInfo({ user, offers, setOffers }) {
+export function UserInfo({ user }) {
     const [sellOffers, setSellOffers] = useState(null);
     const [buyOffers, setBuyOffers] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function loadAllOffers() {
-            if (!user || !user._id) return; // Só busca se user._id existir
+    // Mover a função loadAllOffers para fora do useEffect
+    const loadAllOffers = async () => {
+        if (!user || !user._id) return; // Só busca se user._id existir
 
-            setLoading(true);
-            try {
-                const userOffers = await getOffersByUser(user._id);
-                setOffers(userOffers);
+        setLoading(true);
+        try {
+            const userOffers = await getOffersByUser(user._id);
 
-                if (!userOffers) {
-                    return;
-                }
-
-                const sell = userOffers.filter((offer) => offer.type === "sell");
-                const buy = userOffers.filter((offer) => offer.type === "buy");
-
-                setSellOffers(sell);
-                setBuyOffers(buy);
-            } catch (error) {
-                console.error("Erro ao carregar ofertas:", error);
-            } finally {
-                setLoading(false);
+            if (!userOffers) {
+                return;
             }
-        }
 
-        loadAllOffers();
+            const sell = userOffers.filter((offer) => offer.type === "sell");
+            const buy = userOffers.filter((offer) => offer.type === "buy");
+
+            setSellOffers(sell);
+            setBuyOffers(buy);
+        } catch (error) {
+            console.error("Erro ao carregar ofertas:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        loadAllOffers(); // Agora chama a função aqui
     }, [user]); // Agora só roda quando `user` muda
+
+    const handleDelete = async (offerId) => {
+        const confirmDelete = window.confirm("Tem certeza que deseja deletar esta oferta?");
+        if (!confirmDelete) return;
+    
+        try {
+            await deleteOffer(offerId);
+            
+            // Recarrega as ofertas após a exclusão
+            loadAllOffers();  // Chama a função para recarregar as ofertas do servidor
+        } catch (error) {
+            console.error("Erro ao deletar oferta:", error);
+        }
+    };    
 
     return (
         <div className="user-info">
@@ -60,7 +74,10 @@ export function UserInfo({ user, offers, setOffers }) {
                             </div>
                         ) : sellOffers?.length > 0 ? (
                             sellOffers.map((sellOffer) => (
-                                <SellCard key={sellOffer._id} offer={sellOffer} />
+                                <div className="user-card-div" key={sellOffer._id}>
+                                    <button className="delete-btn" onClick={() => handleDelete(sellOffer._id)}>Deletar</button>
+                                    <SellCard offer={sellOffer} />
+                                </div>
                             ))
                         ) : (
                             <div className="empty-search">
@@ -76,7 +93,10 @@ export function UserInfo({ user, offers, setOffers }) {
                             </div>
                         ) : buyOffers?.length > 0 ? (
                             buyOffers.map((buyOffer) => (
-                                <BuyCard key={buyOffer._id} offer={buyOffer} />
+                                <div className="user-card-div" key={buyOffer._id}>
+                                    <button className="delete-btn" onClick={() => handleDelete(buyOffer._id)}>Deletar</button>
+                                    <BuyCard offer={buyOffer} />
+                                </div>
                             ))
                         ) : (
                             <div className="empty-search">
