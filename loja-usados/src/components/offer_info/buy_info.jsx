@@ -38,7 +38,7 @@ export function BuyInfo({ offer }) {
 
   //Estado para armazenar isOwner
   //Considerar que começa como owner para esconder o botão
-  const [isOwner, setIsOwner] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
     if (user && offer) {
       setIsOwner(user._id === offer.user_id);
