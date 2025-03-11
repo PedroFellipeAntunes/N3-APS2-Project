@@ -6,7 +6,7 @@ const offers = require("./offerRoutes");
 const users = require("./userRoutes");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 //Fix for payload size
 const bodyParser = require('body-parser');

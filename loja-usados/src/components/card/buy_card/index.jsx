@@ -19,7 +19,6 @@ export function BuyCard({ offer }) {
                     <span 
                         key={index} 
                         className="usage-category" 
-                        onClick={() => handleFilterClick("usage_categories", type)}
                     >
                         {type}
                     </span>
@@ -36,8 +35,7 @@ export function BuyCard({ offer }) {
                 {limitedUsageTypes.map((type, index) => (
                     <span 
                         key={index} 
-                        className="usage-type" 
-                        onClick={() => handleFilterClick("usage_type", type)}
+                        className="usage-type"
                     >
                         {type}
                     </span>
@@ -49,8 +47,7 @@ export function BuyCard({ offer }) {
     const renderBrand = () => (
         <div className="card-info">
             <h2 
-                className="product-brand" 
-                onClick={() => handleFilterClick("brand", offer.product.brand)} // Marca como filtro
+                className="product-brand"
             >
                 {offer.product.brand}
             </h2>
