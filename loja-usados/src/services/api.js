@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const URL = "http://localhost:3000";
+//http://localhost:3000
+//Render host for backend
+const URL = "https://test-render-backend-k5fp.onrender.com";
 
 export async function getOffers() {
     try {
